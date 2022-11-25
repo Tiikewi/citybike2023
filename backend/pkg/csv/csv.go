@@ -3,6 +3,7 @@ package csv
 import (
 	"bufio"
 	"citybike/pkg/types"
+	"encoding/csv"
 	"errors"
 	"fmt"
 	"log"
@@ -21,8 +22,8 @@ func ProcessFile() {
 		log.Fatal(err)
 	}
 
-	//journeys := validateFile(f)
-	validateFile(f)
+	journeys := validateFile(f)
+	writeCSV(journeys)
 
 	// TODO something with journeys *
 
@@ -102,8 +103,25 @@ func convertInts(numbers []string) ([]int, error) {
 		} else {
 			ints = append(ints, kk)
 		}
-
 	}
 
 	return ints, nil
+}
+
+func writeCSV(journeys []*types.Journey) {
+	csvFile, err := os.Create("pkg/csv/valitated-journeys.csv")
+	if err != nil {
+		log.Fatalf("failed creating file: %s", err)
+	}
+
+	var jr [][]string
+	for _, journey := range journeys {
+		jr = append(jr, []string{journey.DepTime, journey.RetTime, strconv.Itoa(journey.DepStationId), journey.DepStationName, strconv.Itoa(journey.RetStationId), journey.RetStationName, strconv.Itoa(journey.Distance), strconv.Itoa(journey.Duration)})
+	}
+
+	writer := csv.NewWriter(csvFile)
+	err = writer.WriteAll(jr)
+	if err != nil {
+		log.Fatal("Error when writing new csv")
+	}
 }
