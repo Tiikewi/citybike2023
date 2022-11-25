@@ -21,10 +21,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Add empty .env file
-        run: touch .env
+        run: cd backend && touch .env
       - name: Build the stack
         run: docker-compose up -d
       - name: Build go
-        run: cd backend && go build ./...
+        run: go build ./...
       - name: Test
         run: go test ./... -v
