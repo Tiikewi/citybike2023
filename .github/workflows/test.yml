@@ -1,0 +1,33 @@
+name: Run Go tests
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+env:
+  MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+  MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+  MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+  MYSQL_USER: ${{ secrets.MYSQL_USER }}
+  MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+  MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+  DB_VOLUME_NAME: db-volume
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Add empty .env file
+        working-directory: ./backend
+        run: touch .env
+      - name: Build the stack
+        working-directory: ./backend
+        run: docker-compose up -d
+      - name: Build go
+        working-directory: ./backend
+        run: go build ./...
+      - name: Test
+        working-directory: ./backend
+        run: go test ./... -v
