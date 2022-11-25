@@ -9,6 +9,7 @@ jobs:
   linter:
     name: 'Run linter'
     runs-on: ubuntu-latest
+    working-directory: ./backend
     steps:
       - uses: actions/checkout@v1
         with:
