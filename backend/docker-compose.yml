@@ -1,10 +1,10 @@
 version: "3.8"
 
 services:
-  mariadb:
+  citybike-mariadb:
     image: mariadb:10.9.3
     ports:
-      - '${MYSQL_PORT}:3307'
+      - '${MYSQL_PORT}:3306'
     volumes:
       - db-volume:/var/lib/mysql
     env_file:
@@ -20,7 +20,7 @@ services:
 
   backend:
     depends_on:
-      - mariadb
+      - citybike-mariadb
     container_name: backend-container
     image: backend
     build:

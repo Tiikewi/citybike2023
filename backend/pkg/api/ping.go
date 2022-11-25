@@ -1,7 +1,6 @@
 package api
 
 import (
-	"citybike/pkg/db"
 	"citybike/pkg/types"
 	"encoding/json"
 	"net/http"
@@ -26,14 +25,7 @@ func getPing(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
 	response := types.PingResponse{
-		Message: db.GetVersion(),
-	}
-	if response.Message == "" {
-		json.NewEncoder(w).Encode(
-			types.ErrorResponse{
-				StatusCode: 404,
-				Message:    "Version not found",
-			})
+		Message: "pong",
 	}
 
 	json.NewEncoder(w).Encode(response)

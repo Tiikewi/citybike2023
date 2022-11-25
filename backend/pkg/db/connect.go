@@ -13,7 +13,7 @@ var DB *sql.DB
 
 var (
 	// host            = os.Getenv("MYSQL_HOST")
-	dbContainerName = "mariadb"
+	dbContainerName = "citybike-mariadb"
 	user            = os.Getenv("MYSQL_USER")
 	password        = os.Getenv("MYSQL_PASSWORD")
 	dbname          = os.Getenv("MYSQL_DATABASE")
@@ -29,6 +29,9 @@ func ConnectToDB() {
 
 	DB = db
 
-	// Print version of mariadb.
-	fmt.Println("Connected to MariaDB version: ", GetVersion())
+	// // Print version of mariadb.
+	// fmt.Println("Connected to MariaDB version: ", GetVersion())
+
+	CreateTables()
+
 }
