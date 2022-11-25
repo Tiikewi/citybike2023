@@ -21,5 +21,7 @@ func ProcessFile() {
 	}
 
 	journeys := validateFile(f)
+  
 	writeJourneyCSV(journeys)
+
 }
