@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+        working-directory: ./backend
         with:
           fetch-depth: 1
       - uses: dominikh/staticcheck-action@v1.2.0
