@@ -1,0 +1,39 @@
+definitions:
+  types.ErrorResponse:
+    properties:
+      message:
+        type: string
+      statusCode:
+        type: integer
+    type: object
+  types.PingResponse:
+    properties:
+      message:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    name: Kimi Porthan
+  description: This is a simple boilerplate for Go API.
+  title: Golang example API
+  version: "0.1"
+paths:
+  /ping:
+    get:
+      description: getPing returns json with message key.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.PingResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/types.ErrorResponse'
+      summary: Get ponged back.
+      tags:
+      - Ping
+swagger: "2.0"
