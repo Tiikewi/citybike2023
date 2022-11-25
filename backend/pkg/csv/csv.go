@@ -21,10 +21,11 @@ func ProcessFile() {
 		log.Fatal(err)
 	}
 
-	journeys := validateFile(f)
+	//journeys := validateFile(f)
+	validateFile(f)
 
 	// TODO something with journeys *
-	fmt.Println("JOURNEYS: ", journeys)
+
 }
 
 func validateFile(file *os.File) []*types.Journey {
