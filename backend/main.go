@@ -11,9 +11,9 @@ import (
 	_ "citybike/docs"
 )
 
-// @title Golang example API
+// @title Citybike 2023
 // @version 0.1
-// @description This is a simple boilerplate for Go API.
+// @description Solita Dev Academy pre-assingment.
 
 // @contact.name Kimi Porthan
 
@@ -25,8 +25,6 @@ func main() {
 	if port == ":" {
 		port = ":8080"
 	}
-
-	csv.ProcessFile()
 
 	db.ConnectToDB()
 	defer db.DB.Close()
