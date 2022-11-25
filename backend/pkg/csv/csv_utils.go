@@ -36,10 +36,10 @@ func convertInts(numbers []string) ([]int, error) {
 func writeJourneyCSV(journeys []*types.Journey) {
 	env := os.Getenv("ENVIROMENT")
 	var path string
-	if env == "dev" {
-		path = "/pkg/csv/data/valitated-journeys.csv"
-	} else {
+	if env == "test" {
 		path = "data/test-valitated-journeys.csv"
+	} else {
+		path = "pkg/csv/data/valitated-journeys.csv"
 	}
 	csvFile, err := os.Create(path)
 	if err != nil {

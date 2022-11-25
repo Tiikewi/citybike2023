@@ -3,19 +3,12 @@ package csv
 import (
 	"bufio"
 	"citybike/pkg/types"
+	"encoding/csv"
 	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
-
-// func BenchmarkProcessFile(b *testing.B) {
-// 	b.ResetTimer()
-
-// 	for i := 0; i < b.N; i++ {
-// 		ProcessFile()
-// 	}
-// }
 
 func TestConvertInts(t *testing.T) {
 	strNums := []string{"1", "10", "20"}
@@ -60,6 +53,7 @@ func TestWriteJourneyCSV(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+	defer f.Close()
 
 	s := bufio.NewScanner(f)
 	s.Scan()
@@ -84,4 +78,24 @@ func TestValidateTime(t *testing.T) {
 	time = "2006-01-02"
 	result = validateTime(time)
 	assert.Equal(t, result, false)
+}
+
+func TestProcessFile(t *testing.T) {
+	// test-2021-05.csv has 13 lines and 4 are invalid. So 13 - 1 - header == 9
+	expected := 9
+
+	os.Setenv("ENVIROMENT", "test")
+	defer os.Unsetenv("ENVIROMENT")
+
+	ProcessFile()
+
+	f, err := os.Open("data/valitated-journeys.csv")
+	if err != nil {
+		t.Error(err)
+	}
+	defer f.Close()
+
+	filedata, _ := csv.NewReader(f).ReadAll()
+
+	assert.Equal(t, len(filedata))
 }
