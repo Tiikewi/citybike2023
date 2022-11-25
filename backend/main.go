@@ -2,7 +2,6 @@ package main
 
 import (
 	"citybike/pkg/api"
-	"citybike/pkg/csv"
 	"citybike/pkg/db"
 	"fmt"
 	"net/http"
@@ -26,7 +25,7 @@ func main() {
 		port = ":8080"
 	}
 
-	csv.ProcessFile()
+	// csv.ProcessFile()
 
 	db.ConnectToDB()
 	defer db.DB.Close()

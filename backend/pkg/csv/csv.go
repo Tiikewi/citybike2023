@@ -5,7 +5,8 @@ import (
 	"os"
 )
 
-var FILE_NAME = "pkg/csv/data/2021-05.csv"
+// TODO
+var FILE_NAME = "pkg/csv/data/test-2021-05.csv"
 
 func ProcessFile() {
 	var fileName string
