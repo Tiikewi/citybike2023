@@ -81,8 +81,8 @@ func TestValidateTime(t *testing.T) {
 }
 
 func TestProcessFile(t *testing.T) {
-	// test-2021-05.csv has 13 lines and 4 are invalid. So 13 - 1 - header == 9
-	expected := 9
+	// test-2021-05.csv has 13 lines and 4 are invalid. So 13 - 4 - header == 8
+	expected := 8
 
 	os.Setenv("ENVIROMENT", "test")
 	defer os.Unsetenv("ENVIROMENT")
@@ -97,5 +97,5 @@ func TestProcessFile(t *testing.T) {
 
 	filedata, _ := csv.NewReader(f).ReadAll()
 
-	assert.Equal(t, len(filedata), expected)
+	assert.Equal(t, expected, len(filedata))
 }
