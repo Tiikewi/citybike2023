@@ -97,5 +97,5 @@ func TestProcessFile(t *testing.T) {
 
 	filedata, _ := csv.NewReader(f).ReadAll()
 
-	assert.Equal(t, len(filedata))
+	assert.Equal(t, len(filedata), expected)
 }
