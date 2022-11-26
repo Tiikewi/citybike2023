@@ -2,7 +2,6 @@ package main
 
 import (
 	"citybike/pkg/api"
-	"citybike/pkg/csv"
 	"citybike/pkg/db"
 	"fmt"
 	"net/http"
@@ -11,9 +10,9 @@ import (
 	_ "citybike/docs"
 )
 
-// @title Golang example API
+// @title Citybike 2023
 // @version 0.1
-// @description This is a simple boilerplate for Go API.
+// @description Solita Dev Academy pre-assingment.
 
 // @contact.name Kimi Porthan
 
@@ -26,7 +25,7 @@ func main() {
 		port = ":8080"
 	}
 
-	csv.ProcessFile()
+	// csv.ProcessFile()
 
 	db.ConnectToDB()
 	defer db.DB.Close()
