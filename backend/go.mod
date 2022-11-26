@@ -10,6 +10,8 @@ require (
 require (
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/qustavo/dotsql v1.1.0 // indirect
+	go.uber.org/atomic v1.7.0 // indirect
+	go.uber.org/multierr v1.6.0 // indirect
 )
 
 require (
@@ -36,6 +38,7 @@ require (
 	github.com/swaggo/swag v1.8.7 // indirect
 	github.com/urfave/cli/v2 v2.23.5 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
+	go.uber.org/zap v1.23.0
 	golang.org/x/net v0.2.0 // indirect
 	golang.org/x/sys v0.2.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
