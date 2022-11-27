@@ -22,6 +22,7 @@ func CreateNewServer(log *zap.Logger) *Server {
 	if log != nil {
 		s.Router.Use(mid.SetLogger(log))
 	}
+
 	s.MountHandlers()
 
 	return s
@@ -32,10 +33,12 @@ func (s *Server) MountHandlers() {
 	s.Router.Use(middleware.Logger)
 
 	// Swagger documentation
-	s.Router.Mount("/swagger", httpSwagger.WrapHandler)
+	s.Router.Mount("/api/swagger", httpSwagger.WrapHandler)
 
 	// Mount all handlers here
 
-	s.Router.Route("/ping", handlePing)
+	s.Router.Route("/api/ping", handlePing)
+
+	s.Router.Route("/api/journeys", handleJourneys)
 
 }

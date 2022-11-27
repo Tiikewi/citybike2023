@@ -18,6 +18,38 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/journeys/:{page}": {
+            "get": {
+                "description": "getJourneys returns 10 * page amount of journeys.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Journeys"
+                ],
+                "summary": "Get journeys by page.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/types.Journey"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/types.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/types.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/ping": {
             "get": {
                 "description": "getPing returns json with message key.",
@@ -57,6 +89,38 @@ const docTemplate = `{
                 }
             }
         },
+        "types.Journey": {
+            "type": "object",
+            "properties": {
+                "departureStationId": {
+                    "type": "integer"
+                },
+                "departureStationName": {
+                    "type": "string"
+                },
+                "departureTime": {
+                    "type": "string"
+                },
+                "distance": {
+                    "type": "integer"
+                },
+                "duration": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "returnStationId": {
+                    "type": "integer"
+                },
+                "returnStationName": {
+                    "type": "string"
+                },
+                "returnTime": {
+                    "type": "string"
+                }
+            }
+        },
         "types.PingResponse": {
             "type": "object",
             "properties": {
@@ -74,8 +138,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:8080",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "Golang example API",
-	Description:      "This is a simple boilerplate for Go API.",
+	Title:            "Citybike 2023",
+	Description:      "Solita Dev Academy pre-assingment.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

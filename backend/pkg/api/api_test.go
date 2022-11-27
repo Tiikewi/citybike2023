@@ -19,13 +19,17 @@ func TestGetRouter(t *testing.T) {
 		method string
 		path   string
 	}{
-		"GET /ping": {
+		"GET /api/ping": {
 			method: http.MethodGet,
-			path:   "/ping",
+			path:   "/api/ping",
 		},
 		"GET /swagger": {
 			method: http.MethodGet,
-			path:   "/swagger",
+			path:   "/api/swagger/",
+		},
+		"GET /api/journeys/page/1": {
+			method: http.MethodGet,
+			path:   "/api/journeys/page/1",
 		},
 	}
 

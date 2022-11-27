@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS journey (
 );
 
 -- name: get-journeys
-SELECT * FROM journey WHERE id >= ? ORDER BY id LIMIT ?;
+SELECT * FROM journey WHERE id > ? ORDER BY id LIMIT ?;
 
 -- name: get-journey-count
 SELECT count(*) AS exact_count FROM journey;

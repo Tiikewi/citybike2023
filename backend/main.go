@@ -8,8 +8,6 @@ import (
 	"os"
 
 	_ "citybike/docs"
-
-	"go.uber.org/zap"
 )
 
 // @title Citybike 2023
@@ -32,16 +30,7 @@ func main() {
 	db.ConnectToDB()
 	defer db.DB.Close()
 
-	// configure logger
-	log, _ := zap.NewProduction(zap.WithCaller(false))
-	defer func() {
-		_ = log.Sync()
-	}()
-
-	// print current version
-	log.Info("starting up API...")
-
-	s := api.CreateNewServer(log)
+	s := api.CreateNewServer(nil)
 
 	fmt.Println("Server running on port", port)
 	http.ListenAndServe(port, s.Router)

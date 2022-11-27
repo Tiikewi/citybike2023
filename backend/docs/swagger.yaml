@@ -6,6 +6,27 @@ definitions:
       statusCode:
         type: integer
     type: object
+  types.Journey:
+    properties:
+      departureStationId:
+        type: integer
+      departureStationName:
+        type: string
+      departureTime:
+        type: string
+      distance:
+        type: integer
+      duration:
+        type: integer
+      id:
+        type: integer
+      returnStationId:
+        type: integer
+      returnStationName:
+        type: string
+      returnTime:
+        type: string
+    type: object
   types.PingResponse:
     properties:
       message:
@@ -15,10 +36,31 @@ host: localhost:8080
 info:
   contact:
     name: Kimi Porthan
-  description: This is a simple boilerplate for Go API.
-  title: Golang example API
+  description: Solita Dev Academy pre-assingment.
+  title: Citybike 2023
   version: "0.1"
 paths:
+  /journeys/:{page}:
+    get:
+      description: getJourneys returns 10 * page amount of journeys.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.Journey'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/types.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/types.ErrorResponse'
+      summary: Get journeys by page.
+      tags:
+      - Journeys
   /ping:
     get:
       description: getPing returns json with message key.
