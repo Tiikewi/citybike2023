@@ -13,7 +13,7 @@ import (
 const PAGE_LIMIT int = 10
 
 func handleJourneys(r chi.Router) {
-	r.Get("/", getJourneys)
+	r.Get("/page/{page}", getJourneys)
 }
 
 // @Summary Get journeys by page.

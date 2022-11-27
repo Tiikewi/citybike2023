@@ -39,6 +39,6 @@ func (s *Server) MountHandlers() {
 
 	s.Router.Route("/api/ping", handlePing)
 
-	s.Router.Route("/api/journeys/{page}", handleJourneys)
+	s.Router.Route("/api/journeys", handleJourneys)
 
 }
