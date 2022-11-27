@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a simple boilerplate for Go API.",
-        "title": "Golang example API",
+        "description": "Solita Dev Academy pre-assingment.",
+        "title": "Citybike 2023",
         "contact": {
             "name": "Kimi Porthan"
         },

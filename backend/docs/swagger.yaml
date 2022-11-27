@@ -15,8 +15,8 @@ host: localhost:8080
 info:
   contact:
     name: Kimi Porthan
-  description: This is a simple boilerplate for Go API.
-  title: Golang example API
+  description: Solita Dev Academy pre-assingment.
+  title: Citybike 2023
   version: "0.1"
 paths:
   /ping:

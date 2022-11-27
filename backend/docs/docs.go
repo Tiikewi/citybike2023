@@ -74,8 +74,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:8080",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "Golang example API",
-	Description:      "This is a simple boilerplate for Go API.",
+	Title:            "Citybike 2023",
+	Description:      "Solita Dev Academy pre-assingment.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }
