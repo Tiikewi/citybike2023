@@ -36,3 +36,6 @@ SELECT * FROM journey WHERE id > ? ORDER BY id LIMIT ?;
 -- name: get-journey-count
 SELECT count(*) AS exact_count FROM journey;
 
+
+--name: get-stations
+SELECT * FROM station WHERE id > ? ORDER BY id LIMIT ?;
