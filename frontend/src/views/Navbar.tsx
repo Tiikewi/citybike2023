@@ -8,7 +8,7 @@ export const Navbar = (): JSX.Element | null => {
     <nav className="nav">
       <ul className="container">
           <CustomLink to="/">Home</CustomLink>
-          <CustomLink to="/test">Test</CustomLink>
+          <CustomLink to="/journeys">Journeys</CustomLink>
       </ul>
     </nav>
   );
