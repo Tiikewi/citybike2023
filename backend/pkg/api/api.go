@@ -41,4 +41,6 @@ func (s *Server) MountHandlers() {
 
 	s.Router.Route("/api/journeys", handleJourneys)
 
+	s.Router.Route("/api/stations", handleStations)
+
 }
