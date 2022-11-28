@@ -25,8 +25,9 @@ func GetStations(page int, limit int) []*types.Station {
 		rows.Scan(
 			&station.FID,
 			&station.ID,
-			&station.Name,
+			&station.NameFinnish,
 			&station.NameSwedish,
+			&station.NameEnglish,
 			&station.Address,
 			&station.AddressSwedish,
 			&station.City,

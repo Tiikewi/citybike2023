@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS station (
     id                     INT NOT NULL PRIMARY KEY,
     station_name_finnish   VARCHAR(100) NOT NULL,
     station_name_swedish   VARCHAR(100) NOT NULL,
+    station_name_english   VARCHAR(100) NOT NULL,
     address_finnish        VARCHAR(100) NOT NULL,
     address_swedish        VARCHAR(100) NOT NULL,
     city_name_finnish      VARCHAR(100) NOT NULL,

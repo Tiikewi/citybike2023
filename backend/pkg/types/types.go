@@ -29,8 +29,9 @@ type Coordinates struct {
 type Station struct {
 	FID            int         `json:"fid"`
 	ID             int         `json:"id"`
-	Name           string      `json:"name"`
+	NameFinnish    string      `json:"name"`
 	NameSwedish    string      `json:"nameSwedish"`
+	NameEnglish    string      `json:"nameEnglish"`
 	Address        string      `json:"address"`
 	AddressSwedish string      `json:"addressSwedish"`
 	City           string      `json:"city"`

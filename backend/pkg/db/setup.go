@@ -51,4 +51,8 @@ func CreateTables() {
 	if err != nil {
 		log.Fatal("error when creating journey table. Error: ", err)
 	}
+	_, err = DOT.Exec(DB, "create-station-table")
+	if err != nil {
+		log.Fatal("error when creating station table. Error: ", err)
+	}
 }
