@@ -20,3 +20,23 @@ type Journey struct {
 	Distance       int    `json:"distance"`
 	Duration       int    `json:"duration"`
 }
+
+type Coordinates struct {
+	X float64 `json:"x"`
+	Y float64 `json:"y"`
+}
+
+type Station struct {
+	FID            int         `json:"fid"`
+	ID             int         `json:"id"`
+	NameFinnish    string      `json:"name"`
+	NameSwedish    string      `json:"nameSwedish"`
+	NameEnglish    string      `json:"nameEnglish"`
+	Address        string      `json:"address"`
+	AddressSwedish string      `json:"addressSwedish"`
+	City           string      `json:"city"`
+	CitySwedish    string      `json:"citySwedish"`
+	Operator       string      `json:"operator"`
+	Capacity       int         `json:"capacity"`
+	Coordinates    Coordinates `json:"coordinates"`
+}
