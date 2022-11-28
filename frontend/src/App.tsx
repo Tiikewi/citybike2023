@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { PageLoadingSpinner } from './components/Spinner';
 import { Home } from './views/Home';
 import { Navbar } from './views/Navbar';
-import { Ping } from './views/Ping';
+import { Journeys } from './views/Journeys';
 
 // Create a client
 const queryClient = new QueryClient()
@@ -20,7 +20,7 @@ const Content = (): JSX.Element => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/test" element={<Ping />} />
+        <Route path="/journeys" element={<Journeys />} />
     </Routes>
     </main>
   )
