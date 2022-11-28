@@ -5,8 +5,8 @@ test.describe('Test navbar', () => {
     await page.goto('/')
 
     // Click navbar link "Test"
-    await page.locator('a >> text=Test').click()
-    await expect(page).toHaveURL('/test')
+    await page.locator('a >> text=Journeys').click()
+    await expect(page).toHaveURL('/journeys')
 
     // Click navbar link "Home"
     await page.locator('a >> text=Home').click()
