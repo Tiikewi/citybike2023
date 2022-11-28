@@ -3,8 +3,11 @@ import { useState } from "react";
 import { getJourneys,} from "../lib/apiRequests/journeyRequests";
 import { JOURNEYS_QUERY_KEY } from "../lib/apiRequests/queryKeys";
 
+
+
 export const Journeys = (): JSX.Element => {
   const [page, setPage] = useState(1)
+
     const { isError, data, error} = useQuery({
         queryKey: [JOURNEYS_QUERY_KEY, page],
         queryFn: () => getJourneys(page),
@@ -17,26 +20,30 @@ export const Journeys = (): JSX.Element => {
     }
 
 return (
-    <div>
+    <div className="container">
       <table>
-        <tr>
-          <th>Dep id</th>
-          <th>Dep name</th>
-          <th>Ret id</th>
-          <th>Ret name</th>
-          <th>Distance</th>
-          <th>Duration</th>
-        </tr>
-        {data?.data.map(journey => (
-          <tr key={journey.id}>
-            <td>{journey.departureStationId}</td>
-            <td>{journey.departureStationName}</td>
-            <td>{journey.returnStationId}</td>
-            <td>{journey.returnStationName}</td>
-            <td>{journey.distance}</td>
-            <td>{journey.duration}</td>
+        <thead>
+          <tr>
+            <th>Dep id</th>
+            <th>Dep name</th>
+            <th>Ret id</th>
+            <th>Ret name</th>
+            <th>Distance</th>
+            <th>Duration</th>
           </tr>
+        </thead>
+        <tbody>
+          {data?.data.map(journey => (
+            <tr key={journey.id}>
+              <td>{journey.departureStationId}</td>
+              <td>{journey.departureStationName}</td>
+              <td>{journey.returnStationId}</td>
+              <td>{journey.returnStationName}</td>
+              <td>{journey.distance}</td>
+              <td>{journey.duration}</td>
+            </tr>
         ))}
+        </tbody>
       </table>
 
       <button onClick={() => {if(page > 1) setPage(page - 1)}}>Previous</button>
