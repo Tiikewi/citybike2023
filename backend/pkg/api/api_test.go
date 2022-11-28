@@ -31,6 +31,10 @@ func TestGetRouter(t *testing.T) {
 			method: http.MethodGet,
 			path:   "/api/journeys/page/1",
 		},
+		"GET /api/stations/page/1": {
+			method: http.MethodGet,
+			path:   "/api/stations/page/1",
+		},
 	}
 
 	for name, test := range testcases {
