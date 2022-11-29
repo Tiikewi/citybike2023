@@ -5,12 +5,16 @@ main {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    background-color: #E0E0E0;
-    height: 100%;
-    display: block;
 }
-  
+
+.body {
+  background-color: #E0E0E0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: auto;
+}
+
 
   .container {
     margin: 2rem
