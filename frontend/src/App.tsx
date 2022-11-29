@@ -16,7 +16,7 @@ const Content = (): JSX.Element => {
   const isFetching = useIsFetching();
 
   return(
-    <main style={{}}>
+    <main>
       {isFetching > 0 ? <PageLoadingSpinner /> : null}
       <Navbar />
       <Routes>
