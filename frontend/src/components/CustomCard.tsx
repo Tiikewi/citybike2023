@@ -9,12 +9,15 @@ export const CustomCard = ({
 }: {
   name: string;
   address: string;
-  coordinates: {x: number, y: number}
+  coordinates: {
+    x: number,
+    y: number
+  }
 }) => {
 
   const [isCollapsed, setIsCollapsed] = useState(true)
 
-const cardClickHandler = () => {
+  const cardClickHandler = () => {
   setIsCollapsed(!isCollapsed)
 }
 
@@ -30,7 +33,7 @@ const cardClickHandler = () => {
         <p>Address: {address}</p>
         <p>Journeys from this station: </p>
         <p>Journeys to this station: </p>
-        <p>Coordinates: ({coordinates.x}, {coordinates.y})</p>
+        {coordinates !== undefined ? <p>Coordinates: ({coordinates.x}, {coordinates.y})</p> : null}
       </div>
     </div>
   );

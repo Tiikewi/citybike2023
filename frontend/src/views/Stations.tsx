@@ -26,7 +26,6 @@ export const Stations = (): JSX.Element => {
     }
 
     const onSearch = () => {
-        console.log("search value:", searhField)
         setSearchField("")
     }
     return(
@@ -43,7 +42,7 @@ export const Stations = (): JSX.Element => {
 
             <div className="stations">
                 {data?.data.map(st =>  (
-                <CustomCard name={st.name} address={st.address} coordinates={st.coordinates}></CustomCard>
+                <CustomCard key={st.id} name={st.name} address={st.address} coordinates={st.coordinates}></CustomCard>
                 ))}
             </div>
         </div>
