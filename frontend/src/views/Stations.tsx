@@ -1,10 +1,25 @@
+import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { CustomCard } from '../components/CustomCard'
+import { STATIONS_QUERY_KEY } from '../lib/apiRequests/queryKeys'
+import { getStations } from '../lib/apiRequests/stationRequest'
 import '../styles/stations.css'
 
 export const Stations = (): JSX.Element => {
     const [searhField, setSearchField] = useState("")
+    const [page, setPage] = useState(1)
+
+    const { isError, data, error} = useQuery({
+        queryKey: [STATIONS_QUERY_KEY, page],
+        queryFn: () => getStations(page),
+    })
+
+    if(isError) {
+      if (error instanceof Error) {
+        return <span>{error.message}</span>
+      }
+    }
 
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchField(e.target.value)
@@ -27,17 +42,9 @@ export const Stations = (): JSX.Element => {
             </Form>
 
             <div className="stations">
-                <CustomCard name="Station name 1"></CustomCard>
-                <CustomCard name="Station name 2"></CustomCard>
-                <CustomCard name="Station name 3"></CustomCard>
-                <CustomCard name="Station name 4"></CustomCard>
-                <CustomCard name="Station name 5"></CustomCard>
-                <CustomCard name="Station name 6"></CustomCard>
-                <CustomCard name="Station name 7"></CustomCard>
-                <CustomCard name="Station name 8"></CustomCard>
-                <CustomCard name="Station name 9"></CustomCard>
-                <CustomCard name="Station name 10"></CustomCard>
-       
+                {data?.data.map(st =>  (
+                <CustomCard name={st.name} address={st.address} coordinates={st.coordinates}></CustomCard>
+                ))}
             </div>
         </div>
     )

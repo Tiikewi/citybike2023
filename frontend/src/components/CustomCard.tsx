@@ -3,9 +3,13 @@ import { FiChevronDown } from "react-icons/fi";
 
 export const CustomCard = ({
   name,
+  address,
+  coordinates,
   ...props
 }: {
   name: string;
+  address: string;
+  coordinates: {x: number, y: number}
 }) => {
 
   const [isCollapsed, setIsCollapsed] = useState(true)
@@ -23,9 +27,10 @@ const cardClickHandler = () => {
         </span>
       </div>
       <div className="bottom" id={isCollapsed ? 'collapsed' : ''}>
-        <p>Address: Osoite 123</p>
-        <p>Journeys from this station: 122</p>
-        <p>Journeys to this station: 344</p>
+        <p>Address: {address}</p>
+        <p>Journeys from this station: </p>
+        <p>Journeys to this station: </p>
+        <p>Coordinates: ({coordinates.x}, {coordinates.y})</p>
       </div>
     </div>
   );
