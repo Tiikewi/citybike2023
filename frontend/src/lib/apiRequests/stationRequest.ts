@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { getAsync } from './api'
 
-type Station = {
+export type Station = {
   fid: number
   id: number
   name: string
@@ -16,5 +16,7 @@ type Station = {
   coordinates: { x: number; y: number }
 }
 
-export const getStations = async (page: number): Promise<AxiosResponse<Station[]>> =>
-  getAsync<Station[]>(`/api/stations/page/${page}`)
+export const getStations = async (page: number, str: string): Promise<AxiosResponse<Station[]>> =>
+  str === ''
+    ? getAsync<Station[]>(`/api/stations/page/${page}`)
+    : getAsync<Station[]>(`/api/stations/page/${page}/${str}`)
