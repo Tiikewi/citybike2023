@@ -12,6 +12,7 @@ import (
 
 func handleStations(r chi.Router) {
 	r.Get("/page/{page}", getStations)
+	r.Get("/page/{page}/{name}", getStationsByName)
 }
 
 // @Summary Get journeys by page.
@@ -37,6 +38,27 @@ func getStations(w http.ResponseWriter, r *http.Request) {
 	}
 
 	stations := db.GetStations(pageInt, PAGE_LIMIT)
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(stations)
+}
+
+func getStationsByName(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+
+	page := chi.URLParam(r, "page")
+	name := chi.URLParam(r, "name")
+	pageInt, err := strconv.Atoi(page)
+
+	if err != nil || pageInt < 1 {
+		w.WriteHeader(http.StatusBadRequest)
+		jsonError := types.ErrorResponse{Message: "Invalid parameter.", StatusCode: 400}
+		json.NewEncoder(w).Encode(jsonError)
+		return
+	}
+
+	stations := db.GetStationsByName(pageInt, PAGE_LIMIT, name)
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(stations)

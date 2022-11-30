@@ -40,3 +40,6 @@ SELECT count(*) AS exact_count FROM journey;
 
 --name: get-stations
 SELECT * FROM station WHERE id > ? ORDER BY id LIMIT ?;
+
+--name: get-stations-by-name
+SELECT * from station WHERE station_name_finnish LIKE ? LIMIT ?,?;
