@@ -25,8 +25,6 @@ func main() {
 		port = ":8080"
 	}
 
-	// csv.ProcessFile()
-
 	db.ConnectToDB()
 	defer db.DB.Close()
 
