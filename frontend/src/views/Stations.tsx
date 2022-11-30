@@ -5,6 +5,8 @@ import { CustomCard } from '../components/CustomCard'
 import { STATIONS_QUERY_KEY } from '../lib/apiRequests/queryKeys'
 import { getStations, Station } from '../lib/apiRequests/stationRequest'
 import '../styles/stations.css'
+import { GrNext, GrPrevious } from "react-icons/gr";
+
 
 export const Stations = (): JSX.Element => {
     const [searhField, setSearchField] = useState('')
@@ -51,6 +53,15 @@ export const Stations = (): JSX.Element => {
                 </Form.Group>
             <Button variant="primary" onClick={onSearch}>Search</Button>
             </Form>
+
+            <div className="page">
+                <Button variant='white' onClick={() => 
+                    {if(page > 1) setPage(page - 1)}}>
+                        <GrPrevious /></Button>
+                <label>Page: {page}</label>
+                {/* TODO prevent page going over avaible pages. */}
+                <Button onClick={() => setPage(page + 1)} variant='white'><GrNext /></Button>
+            </div>
 
             <div className="stations">
                {data?.data === null ? (<p>No stations</p>) : (
