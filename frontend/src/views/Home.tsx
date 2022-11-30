@@ -2,9 +2,8 @@ import '../styles/home.css'
 
 export const Home = (): JSX.Element => {
     return(
-      <div className="container">
+      <div className='body'>
         <h1>This is homepage</h1>
-        <div className="body">
           <p>Some useful information here.</p>
           <ul>
             <li>List item 1</li>
@@ -12,6 +11,5 @@ export const Home = (): JSX.Element => {
             <li>List item 3</li>
           </ul>
         </div>
-      </div>
     )
   }

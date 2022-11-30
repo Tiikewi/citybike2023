@@ -4,6 +4,7 @@ import { PageLoadingSpinner } from './components/Spinner';
 import { Home } from './views/Home';
 import { Navbar } from './views/Navbar';
 import { Journeys } from './views/Journeys';
+import { Stations } from './views/Stations';
 
 // Create a client
 const queryClient = new QueryClient()
@@ -18,10 +19,13 @@ const Content = (): JSX.Element => {
     <main>
       {isFetching > 0 ? <PageLoadingSpinner /> : null}
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/journeys" element={<Journeys />} />
-    </Routes>
+      <div className="body">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/journeys" element={<Journeys />} />
+          <Route path="/stations" element={<Stations />} />
+        </Routes>
+      </div>
     </main>
   )
 }

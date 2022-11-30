@@ -9,6 +9,7 @@ export const Navbar = (): JSX.Element | null => {
       <ul className="container">
           <CustomLink to="/">Home</CustomLink>
           <CustomLink to="/journeys">Journeys</CustomLink>
+          <CustomLink to="/stations">Stations</CustomLink>
       </ul>
     </nav>
   );
