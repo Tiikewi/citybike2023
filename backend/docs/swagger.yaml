@@ -27,11 +27,6 @@ definitions:
       returnTime:
         type: string
     type: object
-  types.PingResponse:
-    properties:
-      message:
-        type: string
-    type: object
 host: localhost:8080
 info:
   contact:
@@ -61,21 +56,4 @@ paths:
       summary: Get journeys by page.
       tags:
       - Journeys
-  /ping:
-    get:
-      description: getPing returns json with message key.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/types.PingResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/types.ErrorResponse'
-      summary: Get ponged back.
-      tags:
-      - Ping
 swagger: "2.0"

@@ -41,8 +41,6 @@ func (s *Server) MountHandlers() {
 
 	// Mount all handlers here
 
-	s.Router.Route("/api/ping", handlePing)
-
 	s.Router.Route("/api/journeys", handleJourneys)
 
 	s.Router.Route("/api/stations", handleStations)

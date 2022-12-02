@@ -49,32 +49,6 @@ const docTemplate = `{
                     }
                 }
             }
-        },
-        "/ping": {
-            "get": {
-                "description": "getPing returns json with message key.",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Ping"
-                ],
-                "summary": "Get ponged back.",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/types.PingResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/types.ErrorResponse"
-                        }
-                    }
-                }
-            }
         }
     },
     "definitions": {
@@ -117,14 +91,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "returnTime": {
-                    "type": "string"
-                }
-            }
-        },
-        "types.PingResponse": {
-            "type": "object",
-            "properties": {
-                "message": {
                     "type": "string"
                 }
             }
