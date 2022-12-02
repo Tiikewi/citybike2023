@@ -5,14 +5,13 @@ import (
 )
 
 func GetJourneys(page int, limit int) ([]*types.Journey, error) {
-	// var from int
-	// if page == 1 {
-	// 	from = 0
-	// } else {
-	// 	from = (page * limit) - limit
-	// }
-	// rows, err := DOT.Query(DB, "get-journeys", from, limit)
-	rows, err := DOT.Query(DB, "get-journeys")
+	var from int
+	if page == 1 {
+		from = 0
+	} else {
+		from = (page * limit) - limit
+	}
+	rows, err := DOT.Query(DB, "get-journeys", from, limit)
 	if err != nil {
 		return nil, err
 	}
@@ -29,8 +28,7 @@ func GetJourneys(page int, limit int) ([]*types.Journey, error) {
 			&journey.Distance,
 			&journey.Duration,
 			&journey.DepStationName,
-			// &journey.RetStationName)
-		)
+			&journey.RetStationName)
 		journeys = append(journeys, &journey)
 	}
 

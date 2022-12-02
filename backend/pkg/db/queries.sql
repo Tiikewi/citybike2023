@@ -35,7 +35,10 @@ CREATE TABLE IF NOT EXISTS station (
 );
 
 -- name: get-journeys
-SELECT j.*, s.station_name_finnish FROM journey AS j INNER JOIN station AS s ON (j.departure_station_id=s.id) ORDER BY j.id LIMIT 10;
+SELECT j.*, s1.station_name_finnish, s2.station_name_finnish FROM journey j
+LEFT OUTER JOIN station s1 ON j.departure_station_id = s1.id
+LEFT OUTER JOIN station s2 ON return_station_id = s2.id
+LIMIT ?,?;
 
 -- name: get-journey-count
 SELECT count(*) AS exact_count FROM journey;
