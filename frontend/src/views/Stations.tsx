@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import { KeyboardEventHandler, useState } from 'react'
+import { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { CustomCard } from '../components/CustomCard'
 import { STATIONS_QUERY_KEY } from '../lib/apiRequests/queryKeys'
-import { getStations, Station } from '../lib/apiRequests/stationRequest'
+import { getStations } from '../lib/apiRequests/stationRequest'
 import '../styles/stations.css'
 import { GrNext, GrPrevious } from "react-icons/gr";
 
@@ -43,7 +43,7 @@ export const Stations = (): JSX.Element => {
       }
 
     return(
-        <div className='stBody'>
+        <div className='body'>
             <Form onSubmit={(e) => e.preventDefault()}  onKeyDown={handleKeyDown}>
                 <Form.Group className="mb-3">
                     <Form.Control onChange={onInputChange} type="text" placeholder="Station name" value={searhField} />

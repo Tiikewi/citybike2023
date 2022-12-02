@@ -13,6 +13,10 @@ main {
   width: 100%;
   position: absolute;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
 }
 
 
