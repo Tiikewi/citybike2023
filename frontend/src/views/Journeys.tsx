@@ -1,5 +1,7 @@
 import { useQuery} from "@tanstack/react-query";
 import { useState } from "react";
+import { Button, Table } from "react-bootstrap";
+import { GrNext, GrPrevious } from "react-icons/gr";
 import { getJourneys,} from "../lib/apiRequests/journeyRequests";
 import { JOURNEYS_QUERY_KEY } from "../lib/apiRequests/queryKeys";
 
@@ -20,16 +22,23 @@ export const Journeys = (): JSX.Element => {
     }
 
 return (
-    <div className="container">
-      <table>
+    <div className="body">
+      <Table striped>
         <thead>
           <tr>
-            <th>Dep id</th>
-            <th>Dep name</th>
-            <th>Ret id</th>
-            <th>Ret name</th>
-            <th>Distance</th>
-            <th>Duration</th>
+            <th colSpan={2}>Departure</th>
+            <th>|</th>
+            <th colSpan={2}>Return</th>
+          </tr>
+          <tr>
+            <th style={{width: "10%"}}>Station ID</th>
+            <th style={{width: "20%"}}>Station name</th>
+            <th></th>
+            <th style={{width: "10%"}}>Station ID</th>
+            <th style={{width: "20%"}}>Station name</th>
+            <th></th>
+            <th>Distance (m)</th>
+            <th>Duration (min)</th>
           </tr>
         </thead>
         <tbody>
@@ -37,17 +46,24 @@ return (
             <tr key={journey.id}>
               <td>{journey.departureStationId}</td>
               <td>{journey.departureStationName}</td>
+              <td>|</td>
               <td>{journey.returnStationId}</td>
               <td>{journey.returnStationName}</td>
+              <td>|</td>
               <td>{journey.distance}</td>
               <td>{journey.duration}</td>
             </tr>
         ))}
         </tbody>
-      </table>
-
-      <button onClick={() => {if(page > 1) setPage(page - 1)}}>Previous</button>
-      <button onClick={() => setPage(page + 1)}>Next</button>
+      </Table>
+      <div className="page">
+       <Button variant='white' onClick={() => 
+                    {if(page > 1) setPage(page - 1)}}>
+                        <GrPrevious /></Button>
+                <label>Page: {page}</label>
+                {/* TODO prevent page going over avaible pages. */}
+                <Button onClick={() => setPage(page + 1)} variant='white'><GrNext /></Button>
+      </div>
     </div>
   )
 }

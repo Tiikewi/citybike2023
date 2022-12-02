@@ -43,7 +43,7 @@ export const Stations = (): JSX.Element => {
       }
 
     return(
-        <div className='stBody'>
+        <div className='body'>
             <Form onSubmit={(e) => e.preventDefault()}  onKeyDown={handleKeyDown}>
                 <Form.Group className="mb-3">
                     <Form.Control onChange={onInputChange} type="text" placeholder="Station name" value={searhField} />
