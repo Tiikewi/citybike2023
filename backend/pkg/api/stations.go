@@ -34,7 +34,11 @@ func getStations(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	stations := db.GetStations(pageInt, PAGE_LIMIT)
+	stations, err := db.GetStations(pageInt, PAGE_LIMIT)
+	if err != nil {
+		sendJSONError(err.Error(), http.StatusInternalServerError, w)
+		return
+	}
 	if len(stations) == 0 {
 		sendJSONError("No stations found", http.StatusNotFound, w)
 		return
@@ -57,7 +61,11 @@ func getStationsByName(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	stations := db.GetStationsByName(pageInt, PAGE_LIMIT, name)
+	stations, err := db.GetStationsByName(pageInt, PAGE_LIMIT, name)
+	if err != nil {
+		sendJSONError(err.Error(), http.StatusInternalServerError, w)
+		return
+	}
 	if len(stations) == 0 {
 		sendJSONError("No stations found", http.StatusNotFound, w)
 		return
