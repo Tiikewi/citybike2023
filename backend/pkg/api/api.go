@@ -1,12 +1,16 @@
 package api
 
 import (
+	"encoding/json"
+	"net/http"
+
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
 	"go.uber.org/zap"
 
 	_ "citybike/docs"
 	mid "citybike/pkg/middleware"
+	"citybike/pkg/types"
 
 	httpSwagger "github.com/swaggo/http-swagger"
 )
@@ -43,4 +47,11 @@ func (s *Server) MountHandlers() {
 
 	s.Router.Route("/api/stations", handleStations)
 
+}
+
+// @Summary Send error as JSON with given params..
+func sendJSONError(msg string, status int, w http.ResponseWriter) {
+	w.WriteHeader(status)
+	jsonError := types.ErrorResponse{Message: msg, StatusCode: status}
+	json.NewEncoder(w).Encode(jsonError)
 }

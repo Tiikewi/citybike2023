@@ -2,7 +2,6 @@ package api
 
 import (
 	"citybike/pkg/db"
-	"citybike/pkg/types"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -31,13 +30,15 @@ func getStations(w http.ResponseWriter, r *http.Request) {
 	pageInt, err := strconv.Atoi(page)
 
 	if err != nil || pageInt < 1 {
-		w.WriteHeader(http.StatusBadRequest)
-		jsonError := types.ErrorResponse{Message: "Invalid parameter.", StatusCode: 400}
-		json.NewEncoder(w).Encode(jsonError)
+		sendJSONError("Invalid parameter.", http.StatusBadRequest, w)
 		return
 	}
 
 	stations := db.GetStations(pageInt, PAGE_LIMIT)
+	if len(stations) == 0 {
+		sendJSONError("No stations found", http.StatusNotFound, w)
+		return
+	}
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(stations)
@@ -52,13 +53,15 @@ func getStationsByName(w http.ResponseWriter, r *http.Request) {
 	pageInt, err := strconv.Atoi(page)
 
 	if err != nil || pageInt < 1 {
-		w.WriteHeader(http.StatusBadRequest)
-		jsonError := types.ErrorResponse{Message: "Invalid parameter.", StatusCode: 400}
-		json.NewEncoder(w).Encode(jsonError)
+		sendJSONError("Invalid parameters", http.StatusBadRequest, w)
 		return
 	}
 
 	stations := db.GetStationsByName(pageInt, PAGE_LIMIT, name)
+	if len(stations) == 0 {
+		sendJSONError("No stations found", http.StatusNotFound, w)
+		return
+	}
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(stations)

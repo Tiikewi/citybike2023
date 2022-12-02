@@ -2,7 +2,6 @@ package db
 
 import (
 	"citybike/pkg/types"
-	"fmt"
 	"log"
 )
 
@@ -79,7 +78,6 @@ func GetStationsByName(page int, limit int, name string) []*types.Station {
 			&coordinates.X,
 			&coordinates.Y,
 		)
-		fmt.Println("STATION: ")
 		station.Coordinates = coordinates
 		stations = append(stations, &station)
 	}

@@ -19,13 +19,11 @@ const Content = (): JSX.Element => {
     <main>
       {isFetching > 0 ? <PageLoadingSpinner /> : null}
       <Navbar />
-      <div className="body">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/journeys" element={<Journeys />} />
           <Route path="/stations" element={<Stations />} />
         </Routes>
-      </div>
     </main>
   )
 }
