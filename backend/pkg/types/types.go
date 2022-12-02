@@ -23,16 +23,12 @@ type Coordinates struct {
 }
 
 type Station struct {
-	FID            int         `json:"fid"`
-	ID             int         `json:"id"`
-	NameFinnish    string      `json:"name"`
-	NameSwedish    string      `json:"nameSwedish"`
-	NameEnglish    string      `json:"nameEnglish"`
-	Address        string      `json:"address"`
-	AddressSwedish string      `json:"addressSwedish"`
-	City           string      `json:"city"`
-	CitySwedish    string      `json:"citySwedish"`
-	Operator       string      `json:"operator"`
-	Capacity       int         `json:"capacity"`
-	Coordinates    Coordinates `json:"coordinates"`
+	FID         int         `json:"fid"`
+	ID          int         `json:"id"`
+	Name        string      `json:"name"`
+	Address     string      `json:"address"`
+	City        string      `json:"city"`
+	Operator    string      `json:"operator"`
+	Capacity    int         `json:"capacity"`
+	Coordinates Coordinates `json:"coordinates"`
 }

@@ -7,11 +7,14 @@ CREATE TABLE IF NOT EXISTS journey (
 	departure_time         DATETIME NOT NULL,
 	return_time            DATETIME NOT NULL,
     departure_station_id   INT NOT NULL,
-    departure_station_name VARCHAR(100) NOT NULL,
     return_station_id      INT NOT NULL,
-    return_station_name    VARCHAR(100) NOT NULL,
     distance               INT NOT NULL,
-    duration               INT NOT NULL
+    duration               INT NOT NULL,
+
+    FOREIGN KEY(departure_station_id)
+    REFERENCES station(id),
+    FOREIGN KEY(return_station_id)
+    REFERENCES station(id)
 );
 
 -- name: create-station-table
@@ -32,14 +35,27 @@ CREATE TABLE IF NOT EXISTS station (
 );
 
 -- name: get-journeys
-SELECT * FROM journey WHERE id > ? ORDER BY id LIMIT ?;
+SELECT j.*, s1.station_name_finnish, s2.station_name_finnish FROM journey j
+LEFT OUTER JOIN station s1 ON j.departure_station_id = s1.id
+LEFT OUTER JOIN station s2 ON return_station_id = s2.id
+LIMIT ?,?;
 
 -- name: get-journey-count
 SELECT count(*) AS exact_count FROM journey;
 
 
 --name: get-stations
-SELECT * FROM station WHERE id > ? ORDER BY id LIMIT ?;
+SELECT fid, id, station_name_finnish, 
+address_finnish, city_name_finnish, 
+operator, capacity, x_coordinate, y_coordinate
+FROM station LIMIT ?,?;
+
 
 --name: get-stations-by-name
-SELECT * from station WHERE station_name_finnish LIKE ? LIMIT ?,?;
+SELECT fid, id, station_name_finnish,
+address_finnish, city_name_finnish,
+operator, capacity, x_coordinate,
+y_coordinate 
+FROM station 
+WHERE station_name_finnish 
+LIKE ? LIMIT ?,?;

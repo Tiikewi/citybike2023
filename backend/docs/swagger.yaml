@@ -38,13 +38,9 @@ definitions:
     properties:
       address:
         type: string
-      addressSwedish:
-        type: string
       capacity:
         type: integer
       city:
-        type: string
-      citySwedish:
         type: string
       coordinates:
         $ref: '#/definitions/types.Coordinates'
@@ -53,10 +49,6 @@ definitions:
       id:
         type: integer
       name:
-        type: string
-      nameEnglish:
-        type: string
-      nameSwedish:
         type: string
       operator:
         type: string

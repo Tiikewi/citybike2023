@@ -17,7 +17,6 @@ func GetJourneys(page int, limit int) ([]*types.Journey, error) {
 	}
 
 	var journeys []*types.Journey
-
 	for rows.Next() {
 		var journey types.Journey
 		rows.Scan(
@@ -25,11 +24,11 @@ func GetJourneys(page int, limit int) ([]*types.Journey, error) {
 			&journey.DepTime,
 			&journey.RetTime,
 			&journey.DepStationId,
-			&journey.DepStationName,
 			&journey.RetStationId,
-			&journey.RetStationName,
 			&journey.Distance,
-			&journey.Duration)
+			&journey.Duration,
+			&journey.DepStationName,
+			&journey.RetStationName)
 		journeys = append(journeys, &journey)
 	}
 

@@ -228,16 +228,10 @@ const docTemplate = `{
                 "address": {
                     "type": "string"
                 },
-                "addressSwedish": {
-                    "type": "string"
-                },
                 "capacity": {
                     "type": "integer"
                 },
                 "city": {
-                    "type": "string"
-                },
-                "citySwedish": {
                     "type": "string"
                 },
                 "coordinates": {
@@ -250,12 +244,6 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "name": {
-                    "type": "string"
-                },
-                "nameEnglish": {
-                    "type": "string"
-                },
-                "nameSwedish": {
                     "type": "string"
                 },
                 "operator": {
