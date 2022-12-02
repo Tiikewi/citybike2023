@@ -229,6 +229,9 @@
                 "coordinates": {
                     "$ref": "#/definitions/types.Coordinates"
                 },
+                "departures": {
+                    "type": "integer"
+                },
                 "fid": {
                     "type": "integer"
                 },
@@ -240,6 +243,9 @@
                 },
                 "operator": {
                     "type": "string"
+                },
+                "returns": {
+                    "type": "integer"
                 }
             }
         }

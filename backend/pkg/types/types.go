@@ -31,4 +31,6 @@ type Station struct {
 	Operator    string      `json:"operator"`
 	Capacity    int         `json:"capacity"`
 	Coordinates Coordinates `json:"coordinates"`
+	Returns     int         `json:"returns"`
+	Departures  int         `json:"departures"`
 }

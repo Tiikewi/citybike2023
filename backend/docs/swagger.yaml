@@ -44,6 +44,8 @@ definitions:
         type: string
       coordinates:
         $ref: '#/definitions/types.Coordinates'
+      departures:
+        type: integer
       fid:
         type: integer
       id:
@@ -52,6 +54,8 @@ definitions:
         type: string
       operator:
         type: string
+      returns:
+        type: integer
     type: object
 host: localhost:8080
 info:
