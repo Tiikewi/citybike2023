@@ -42,8 +42,17 @@ SELECT count(*) AS exact_count FROM journey;
 
 
 --name: get-stations
-SELECT fid, id, station_name_finnish, address_finnish, city_name_finnish, operator, capacity, x_coordinate, y_coordinate from station LIMIT ?,?;
+SELECT fid, id, station_name_finnish, 
+address_finnish, city_name_finnish, 
+operator, capacity, x_coordinate, y_coordinate
+FROM station LIMIT ?,?;
 
 
 --name: get-stations-by-name
-SELECT fid, id, station_name_finnish, address_finnish, city_name_finnish, operator, capacity, x_coordinate, y_coordinate from station WHERE station_name_finnish LIKE ? LIMIT ?,?;
+SELECT fid, id, station_name_finnish,
+address_finnish, city_name_finnish,
+operator, capacity, x_coordinate,
+y_coordinate 
+FROM station 
+WHERE station_name_finnish 
+LIKE ? LIMIT ?,?;
