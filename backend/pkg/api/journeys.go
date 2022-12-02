@@ -35,7 +35,11 @@ func getJourneys(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	journeys := db.GetJourneys(pageInt, PAGE_LIMIT)
+	journeys, err := db.GetJourneys(pageInt, PAGE_LIMIT)
+	if err != nil {
+		sendJSONError(err.Error(), http.StatusInternalServerError, w)
+		return
+	}
 
 	if len(journeys) == 0 {
 		sendJSONError("No journeys found", http.StatusNotFound, w)

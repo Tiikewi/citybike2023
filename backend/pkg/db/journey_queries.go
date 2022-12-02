@@ -2,10 +2,9 @@ package db
 
 import (
 	"citybike/pkg/types"
-	"log"
 )
 
-func GetJourneys(page int, limit int) []*types.Journey {
+func GetJourneys(page int, limit int) ([]*types.Journey, error) {
 	var from int
 	if page == 1 {
 		from = 0
@@ -14,7 +13,7 @@ func GetJourneys(page int, limit int) []*types.Journey {
 	}
 	rows, err := DOT.Query(DB, "get-journeys", from, limit)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	var journeys []*types.Journey
@@ -34,14 +33,14 @@ func GetJourneys(page int, limit int) []*types.Journey {
 		journeys = append(journeys, &journey)
 	}
 
-	return journeys
+	return journeys, nil
 }
 
-func GetJourneyCount() int {
+func GetJourneyCount() (int, error) {
 
 	row, err := DOT.QueryRow(DB, "get-journey-count")
 	if err != nil {
-		log.Fatal(err)
+		return -1, err
 	}
 
 	var count int
@@ -50,5 +49,5 @@ func GetJourneyCount() int {
 		panic("Error when fetching amount of journeys!")
 	}
 
-	return count
+	return count, nil
 }
