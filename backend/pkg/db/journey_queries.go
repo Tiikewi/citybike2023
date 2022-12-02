@@ -5,19 +5,19 @@ import (
 )
 
 func GetJourneys(page int, limit int) ([]*types.Journey, error) {
-	var from int
-	if page == 1 {
-		from = 0
-	} else {
-		from = (page * limit) - limit
-	}
-	rows, err := DOT.Query(DB, "get-journeys", from, limit)
+	// var from int
+	// if page == 1 {
+	// 	from = 0
+	// } else {
+	// 	from = (page * limit) - limit
+	// }
+	// rows, err := DOT.Query(DB, "get-journeys", from, limit)
+	rows, err := DOT.Query(DB, "get-journeys")
 	if err != nil {
 		return nil, err
 	}
 
 	var journeys []*types.Journey
-
 	for rows.Next() {
 		var journey types.Journey
 		rows.Scan(
@@ -25,11 +25,12 @@ func GetJourneys(page int, limit int) ([]*types.Journey, error) {
 			&journey.DepTime,
 			&journey.RetTime,
 			&journey.DepStationId,
-			&journey.DepStationName,
 			&journey.RetStationId,
-			&journey.RetStationName,
 			&journey.Distance,
-			&journey.Duration)
+			&journey.Duration,
+			&journey.DepStationName,
+			// &journey.RetStationName)
+		)
 		journeys = append(journeys, &journey)
 	}
 
