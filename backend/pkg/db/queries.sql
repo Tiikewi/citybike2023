@@ -59,3 +59,20 @@ y_coordinate
 FROM station 
 WHERE station_name_finnish 
 LIKE ? LIMIT ?,?;
+
+
+--name: get-ret-and-dep-count
+SELECT (
+    SELECT COUNT(*)
+    FROM   journey j
+    WHERE j.return_station_id = ?
+) AS tot_returns,
+(
+SELECT  (
+    SELECT COUNT(*)
+    FROM   journey j
+    WHERE j.departure_station_id = ?) 
+) AS tot_departures
+
+--name: get-departure-count
+SELECT count(*) from journey WHERE departure_station_id = ?;

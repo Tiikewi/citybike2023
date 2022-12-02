@@ -237,6 +237,9 @@ const docTemplate = `{
                 "coordinates": {
                     "$ref": "#/definitions/types.Coordinates"
                 },
+                "departures": {
+                    "type": "integer"
+                },
                 "fid": {
                     "type": "integer"
                 },
@@ -248,6 +251,9 @@ const docTemplate = `{
                 },
                 "operator": {
                     "type": "string"
+                },
+                "returns": {
+                    "type": "integer"
                 }
             }
         }

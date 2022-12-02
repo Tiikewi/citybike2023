@@ -29,6 +29,7 @@ func GetJourneys(page int, limit int) ([]*types.Journey, error) {
 			&journey.Duration,
 			&journey.DepStationName,
 			&journey.RetStationName)
+
 		journeys = append(journeys, &journey)
 	}
 
