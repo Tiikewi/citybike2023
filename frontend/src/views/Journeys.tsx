@@ -5,6 +5,12 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import { getJourneys,} from "../lib/apiRequests/journeyRequests";
 import { JOURNEYS_QUERY_KEY } from "../lib/apiRequests/queryKeys";
 
+const formatDuration = (time: number) => {
+  var seconds = time % 60;
+  var minutes = (time / 60).toFixed(0);
+
+  return `${minutes} min ${seconds} s`;
+};
 
 
 export const Journeys = (): JSX.Element => {
@@ -39,7 +45,7 @@ return (
             <th style={{width: "20%"}}>Station name</th>
             <th></th>
             <th>Distance (km)</th>
-            <th>Duration (min)</th>
+            <th>Duration</th>
           </tr>
         </thead>
         <tbody>
@@ -52,7 +58,7 @@ return (
               <td>{journey.returnStationName}</td>
               <td>|</td>
               <td>{(journey.distance / 100).toFixed(2)}</td>
-              <td>{journey.duration}</td>
+              <td>{formatDuration(journey.duration)}</td>
             </tr>
         ))}
         </tbody>
