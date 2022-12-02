@@ -29,6 +29,7 @@ return (
             <th colSpan={2}>Departure</th>
             <th>|</th>
             <th colSpan={2}>Return</th>
+            <th>|</th>
           </tr>
           <tr>
             <th style={{width: "10%"}}>Station ID</th>
@@ -37,7 +38,7 @@ return (
             <th style={{width: "10%"}}>Station ID</th>
             <th style={{width: "20%"}}>Station name</th>
             <th></th>
-            <th>Distance (m)</th>
+            <th>Distance (km)</th>
             <th>Duration (min)</th>
           </tr>
         </thead>
@@ -50,19 +51,20 @@ return (
               <td>{journey.returnStationId}</td>
               <td>{journey.returnStationName}</td>
               <td>|</td>
-              <td>{journey.distance}</td>
+              <td>{(journey.distance / 100).toFixed(2)}</td>
               <td>{journey.duration}</td>
             </tr>
         ))}
         </tbody>
       </Table>
       <div className="page">
-       <Button variant='white' onClick={() => 
+        <Button variant='white' onClick={() => 
                     {if(page > 1) setPage(page - 1)}}>
-                        <GrPrevious /></Button>
-                <label>Page: {page}</label>
-                {/* TODO prevent page going over avaible pages. */}
-                <Button onClick={() => setPage(page + 1)} variant='white'><GrNext /></Button>
+                        <GrPrevious />
+        </Button>
+        <label>Page: {page}</label>
+        {/* TODO prevent page going over avaible pages. */}
+        <Button onClick={() => setPage(page + 1)} variant='white'><GrNext /></Button>
       </div>
     </div>
   )
