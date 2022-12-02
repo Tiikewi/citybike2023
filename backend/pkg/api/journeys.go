@@ -16,13 +16,15 @@ func handleJourneys(r chi.Router) {
 }
 
 // @Summary Get journeys by page.
-// @Description getJourneys returns 10 * page amount of journeys.
+// @Description GET /api/journeys/{page} returns 10 * page amount of journeys.
 // @Tags Journeys
 // @Produce json
-// @Router /journeys/:{page} [get]
+// @Param page path int true "Page number"
+// @Router /api/journeys/page/{page} [get]
 // @Success 200 {object} types.Journey
 // @Failure 404 {object} types.ErrorResponse
 // @Failure 400 {object} types.ErrorResponse
+// @Failure 500 {object} types.ErrorResponse
 func getJourneys(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")

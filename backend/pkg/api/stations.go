@@ -14,14 +14,16 @@ func handleStations(r chi.Router) {
 	r.Get("/page/{page}/{name}", getStationsByName)
 }
 
-// @Summary Get journeys by page.
-// @Description getJourneys returns 10 * page amount of journeys.
-// @Tags Journeys
+// @Summary Get stations by page.
+// @Description GET /api/stations/{page} returns 10 * page amount of stations.
+// @Tags Stations
 // @Produce json
-// @Router /journeys/:{page} [get]
-// @Success 200 {object} types.Journey
+// @Param page path int true "Page number"
+// @Router /api/stations/page/{page} [get]
+// @Success 200 {object} types.Station
 // @Failure 404 {object} types.ErrorResponse
 // @Failure 400 {object} types.ErrorResponse
+// @Failure 500 {object} types.ErrorResponse
 func getStations(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
@@ -48,6 +50,19 @@ func getStations(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(stations)
 }
 
+// @Summary Get stations by name.
+// @Description GET api/stations/{page}/{string}
+// returns 10 * page amount of stations by given name.
+// Start substring of name also ok.
+// @Tags Stations
+// @Produce json
+// @Param page path int true "Page number"
+// @Param name path string true "substring/name of station"
+// @Router /api/stations/page/{page}/{name} [get]
+// @Success 200 {object} types.Station
+// @Failure 404 {object} types.ErrorResponse
+// @Failure 400 {object} types.ErrorResponse
+// @Failure 500 {object} types.ErrorResponse
 func getStationsByName(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
