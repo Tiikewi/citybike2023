@@ -2,7 +2,6 @@ package api
 
 import (
 	"citybike/pkg/db"
-	"citybike/pkg/types"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -17,13 +16,15 @@ func handleJourneys(r chi.Router) {
 }
 
 // @Summary Get journeys by page.
-// @Description getJourneys returns 10 * page amount of journeys.
+// @Description GET /api/journeys/{page} returns 10 * page amount of journeys.
 // @Tags Journeys
 // @Produce json
-// @Router /journeys/:{page} [get]
+// @Param page path int true "Page number"
+// @Router /api/journeys/page/{page} [get]
 // @Success 200 {object} types.Journey
 // @Failure 404 {object} types.ErrorResponse
 // @Failure 400 {object} types.ErrorResponse
+// @Failure 500 {object} types.ErrorResponse
 func getJourneys(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
@@ -32,13 +33,20 @@ func getJourneys(w http.ResponseWriter, r *http.Request) {
 	pageInt, err := strconv.Atoi(page)
 
 	if err != nil || pageInt < 1 {
-		w.WriteHeader(http.StatusBadRequest)
-		jsonError := types.ErrorResponse{Message: "Invalid parameter.", StatusCode: 400}
-		json.NewEncoder(w).Encode(jsonError)
+		sendJSONError("Invalid parameters", http.StatusBadRequest, w)
 		return
 	}
 
-	journeys := db.GetJourneys(pageInt, PAGE_LIMIT)
+	journeys, err := db.GetJourneys(pageInt, PAGE_LIMIT)
+	if err != nil {
+		sendJSONError(err.Error(), http.StatusInternalServerError, w)
+		return
+	}
+
+	if len(journeys) == 0 {
+		sendJSONError("No journeys found", http.StatusNotFound, w)
+		return
+	}
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(journeys)

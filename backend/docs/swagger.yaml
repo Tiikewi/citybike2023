@@ -1,4 +1,11 @@
 definitions:
+  types.Coordinates:
+    properties:
+      x:
+        type: number
+      "y":
+        type: number
+    type: object
   types.ErrorResponse:
     properties:
       message:
@@ -27,9 +34,31 @@ definitions:
       returnTime:
         type: string
     type: object
-  types.PingResponse:
+  types.Station:
     properties:
-      message:
+      address:
+        type: string
+      addressSwedish:
+        type: string
+      capacity:
+        type: integer
+      city:
+        type: string
+      citySwedish:
+        type: string
+      coordinates:
+        $ref: '#/definitions/types.Coordinates'
+      fid:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      nameEnglish:
+        type: string
+      nameSwedish:
+        type: string
+      operator:
         type: string
     type: object
 host: localhost:8080
@@ -40,9 +69,15 @@ info:
   title: Citybike 2023
   version: "0.1"
 paths:
-  /journeys/:{page}:
+  /api/journeys/page/{page}:
     get:
-      description: getJourneys returns 10 * page amount of journeys.
+      description: GET /api/journeys/{page} returns 10 * page amount of journeys.
+      parameters:
+      - description: Page number
+        in: path
+        name: page
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -58,24 +93,78 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/types.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/types.ErrorResponse'
       summary: Get journeys by page.
       tags:
       - Journeys
-  /ping:
+  /api/stations/page/{page}:
     get:
-      description: getPing returns json with message key.
+      description: GET /api/stations/{page} returns 10 * page amount of stations.
+      parameters:
+      - description: Page number
+        in: path
+        name: page
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/types.PingResponse'
+            $ref: '#/definitions/types.Station'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/types.ErrorResponse'
         "404":
           description: Not Found
           schema:
             $ref: '#/definitions/types.ErrorResponse'
-      summary: Get ponged back.
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/types.ErrorResponse'
+      summary: Get stations by page.
       tags:
-      - Ping
+      - Stations
+  /api/stations/page/{page}/{name}:
+    get:
+      description: GET api/stations/{page}/{string}
+      parameters:
+      - description: Page number
+        in: path
+        name: page
+        required: true
+        type: integer
+      - description: substring/name of station
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.Station'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/types.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/types.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/types.ErrorResponse'
+      summary: Get stations by name.
+      tags:
+      - Stations
 swagger: "2.0"

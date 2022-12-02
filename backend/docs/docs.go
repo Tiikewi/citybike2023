@@ -18,9 +18,9 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/journeys/:{page}": {
+        "/api/journeys/page/{page}": {
             "get": {
-                "description": "getJourneys returns 10 * page amount of journeys.",
+                "description": "GET /api/journeys/{page} returns 10 * page amount of journeys.",
                 "produces": [
                     "application/json"
                 ],
@@ -28,6 +28,15 @@ const docTemplate = `{
                     "Journeys"
                 ],
                 "summary": "Get journeys by page.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -46,29 +55,110 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/types.ErrorResponse"
                         }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/types.ErrorResponse"
+                        }
                     }
                 }
             }
         },
-        "/ping": {
+        "/api/stations/page/{page}": {
             "get": {
-                "description": "getPing returns json with message key.",
+                "description": "GET /api/stations/{page} returns 10 * page amount of stations.",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "Ping"
+                    "Stations"
                 ],
-                "summary": "Get ponged back.",
+                "summary": "Get stations by page.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/types.PingResponse"
+                            "$ref": "#/definitions/types.Station"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/types.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/types.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/types.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/stations/page/{page}/{name}": {
+            "get": {
+                "description": "GET api/stations/{page}/{string}",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Stations"
+                ],
+                "summary": "Get stations by name.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "substring/name of station",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/types.Station"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/types.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/types.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/types.ErrorResponse"
                         }
@@ -78,6 +168,17 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "types.Coordinates": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                }
+            }
+        },
         "types.ErrorResponse": {
             "type": "object",
             "properties": {
@@ -121,10 +222,43 @@ const docTemplate = `{
                 }
             }
         },
-        "types.PingResponse": {
+        "types.Station": {
             "type": "object",
             "properties": {
-                "message": {
+                "address": {
+                    "type": "string"
+                },
+                "addressSwedish": {
+                    "type": "string"
+                },
+                "capacity": {
+                    "type": "integer"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "citySwedish": {
+                    "type": "string"
+                },
+                "coordinates": {
+                    "$ref": "#/definitions/types.Coordinates"
+                },
+                "fid": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nameEnglish": {
+                    "type": "string"
+                },
+                "nameSwedish": {
+                    "type": "string"
+                },
+                "operator": {
                     "type": "string"
                 }
             }

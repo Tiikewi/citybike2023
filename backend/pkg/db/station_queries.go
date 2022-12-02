@@ -2,11 +2,9 @@ package db
 
 import (
 	"citybike/pkg/types"
-	"fmt"
-	"log"
 )
 
-func GetStations(page int, limit int) []*types.Station {
+func GetStations(page int, limit int) ([]*types.Station, error) {
 	var from int
 	if page == 1 {
 		from = 0
@@ -15,7 +13,7 @@ func GetStations(page int, limit int) []*types.Station {
 	}
 	rows, err := DOT.Query(DB, "get-stations", from, limit)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	var stations []*types.Station
@@ -42,10 +40,10 @@ func GetStations(page int, limit int) []*types.Station {
 		stations = append(stations, &station)
 	}
 
-	return stations
+	return stations, nil
 }
 
-func GetStationsByName(page int, limit int, name string) []*types.Station {
+func GetStationsByName(page int, limit int, name string) ([]*types.Station, error) {
 	var from int
 	if page == 1 {
 		from = 0
@@ -56,7 +54,7 @@ func GetStationsByName(page int, limit int, name string) []*types.Station {
 	// % for searching substrings.
 	rows, err := DOT.Query(DB, "get-stations-by-name", name+"%", from, limit)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	var stations []*types.Station
@@ -79,10 +77,9 @@ func GetStationsByName(page int, limit int, name string) []*types.Station {
 			&coordinates.X,
 			&coordinates.Y,
 		)
-		fmt.Println("STATION: ")
 		station.Coordinates = coordinates
 		stations = append(stations, &station)
 	}
 
-	return stations
+	return stations, nil
 }
