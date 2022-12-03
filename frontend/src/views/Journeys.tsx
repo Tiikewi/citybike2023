@@ -14,8 +14,6 @@ const formatDuration = (time: number) => {
   return `${minutes} min ${seconds} s`;
 };
 
-
-
 export enum Sort {
   DepartureName = 1,
   DepartureID = 2,
@@ -25,8 +23,6 @@ export enum Sort {
   Duration = 6,
 
 }
-
-
 
 export const Journeys = (): JSX.Element => {
   const [page, setPage] = useState(1)
