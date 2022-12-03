@@ -38,7 +38,7 @@ export const CustomCard = ({
               <td>{station.address}</td>
               <td>{station.departures}</td>
               <td>{station.returns}</td>
-              <td>{station.coordinates !== undefined ? <p>Coordinates: ({station.coordinates.x}, {station.coordinates.y})</p> : null}</td>
+              <td>{station.coordinates !== undefined ? <p>({station.coordinates.x}, {station.coordinates.y})</p> : null}</td>
             </tr>
           </tbody>
         </Table>
