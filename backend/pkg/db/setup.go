@@ -28,22 +28,6 @@ func getQueryFile() *dotsql.DotSql {
 	return dot
 }
 
-// func GetVersion() string {
-// 	dot := getQueryFile()
-
-// 	row, err := dot.QueryRow(DB, "get-version")
-// 	if err != nil {
-// 		log.Fatal("Error when trying to connect to DB. Err:", err)
-// 	}
-// 	var version string
-// 	err = row.Scan(&version)
-// 	if err != nil {
-// 		log.Fatal("Error: ", err)
-// 	}
-
-// 	return version
-// }
-
 func CreateTables() {
 	DOT = getQueryFile()
 
