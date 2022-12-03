@@ -19,3 +19,15 @@ y_coordinate
 FROM station 
 WHERE station_name_finnish 
 LIKE "%s%%" LIMIT %d,%d;`
+
+const getRetAndDepCountQuery = `SELECT (
+    SELECT COUNT(*)
+    FROM   journey j
+    WHERE j.return_station_id = %d
+) AS tot_returns,
+(
+SELECT  (
+    SELECT COUNT(*)
+    FROM   journey j
+    WHERE j.departure_station_id = %d) 
+) AS tot_departures`

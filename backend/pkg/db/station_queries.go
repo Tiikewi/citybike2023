@@ -35,8 +35,8 @@ func GetStations(page int, limit int) ([]*types.Station, error) {
 		)
 		station.Coordinates = coordinates
 
-		counts, err := DOT.Query(DB, "get-ret-and-dep-count",
-			station.ID, station.ID)
+		counts, err := DB.Query(fmt.Sprintf(getRetAndDepCountQuery,
+			station.ID, station.ID))
 		if err != nil {
 			return nil, err
 		}
@@ -82,8 +82,8 @@ func GetStationsByName(page int, limit int, name string) ([]*types.Station, erro
 			&coordinates.Y,
 		)
 		station.Coordinates = coordinates
-		counts, err := DOT.Query(DB, "get-ret-and-dep-count",
-			station.ID, station.ID)
+		counts, err := DB.Query(fmt.Sprintf(getRetAndDepCountQuery,
+			station.ID, station.ID))
 		if err != nil {
 			return nil, err
 		}

@@ -53,28 +53,28 @@ CREATE TABLE IF NOT EXISTS station (
 -- FROM station LIMIT ?,?;
 
 
---name: get-stations-by-name
-SELECT fid, id, station_name_finnish,
-address_finnish, city_name_finnish,
-operator, capacity, x_coordinate,
-y_coordinate 
-FROM station 
-WHERE station_name_finnish 
-LIKE ? LIMIT ?,?;
+-- --name: get-stations-by-name
+-- SELECT fid, id, station_name_finnish,
+-- address_finnish, city_name_finnish,
+-- operator, capacity, x_coordinate,
+-- y_coordinate 
+-- FROM station 
+-- WHERE station_name_finnish 
+-- LIKE ? LIMIT ?,?;
 
 
 --name: get-ret-and-dep-count
-SELECT (
-    SELECT COUNT(*)
-    FROM   journey j
-    WHERE j.return_station_id = ?
-) AS tot_returns,
-(
-SELECT  (
-    SELECT COUNT(*)
-    FROM   journey j
-    WHERE j.departure_station_id = ?) 
-) AS tot_departures
+-- SELECT (
+--     SELECT COUNT(*)
+--     FROM   journey j
+--     WHERE j.return_station_id = ?
+-- ) AS tot_returns,
+-- (
+-- SELECT  (
+--     SELECT COUNT(*)
+--     FROM   journey j
+--     WHERE j.departure_station_id = ?) 
+-- ) AS tot_departures
 
 --name: get-departure-count
-SELECT count(*) from journey WHERE departure_station_id = ?;
+-- SELECT count(*) from journey WHERE departure_station_id = ?;
