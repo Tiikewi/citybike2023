@@ -24,7 +24,7 @@ export const CustomCard = ({
         </span>
       </div>
       <div className="bottom" id={isCollapsed ? 'collapsed' : ''}>      
-        <Table striped bordered hover>
+        <Table striped bordered>
           <thead>
             <tr>
               <th>Address</th>
