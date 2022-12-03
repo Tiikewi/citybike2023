@@ -4,7 +4,6 @@ import { Button, ButtonGroup, Table } from "react-bootstrap";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { PageLoadingSpinner } from "../components/Spinner";
 import { getJourneys,} from "../lib/apiRequests/journeyRequests";
-import { JOURNEYS_QUERY_KEY } from "../lib/apiRequests/queryKeys";
 import "../styles/journeys.css"
 
 const formatDuration = (time: number) => {
@@ -20,8 +19,7 @@ export enum Sort {
   ReturnName = 3,
   ReturnID = 4,
   Distance = 5,
-  Duration = 6,
-
+  Duration = 6
 }
 
 export const Journeys = (): JSX.Element => {
@@ -30,7 +28,7 @@ export const Journeys = (): JSX.Element => {
 
 
     const { isError, data, error, refetch, isFetching} = useQuery({
-        queryKey: [JOURNEYS_QUERY_KEY, page, sort],
+        queryKey: [page, sort],
         queryFn: () => getJourneys(page, sort),
     })
 

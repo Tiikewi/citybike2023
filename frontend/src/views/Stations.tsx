@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { CustomCard } from '../components/StationCard'
-import { STATIONS_QUERY_KEY } from '../lib/apiRequests/queryKeys'
 import { getStations } from '../lib/apiRequests/stationRequest'
 import '../styles/stations.css'
 import { GrNext, GrPrevious } from "react-icons/gr";
@@ -12,10 +11,8 @@ export const Stations = (): JSX.Element => {
     const [searhField, setSearchField] = useState('')
     const [page, setPage] = useState(1)
 
-
-    
     const { isError, data, error, refetch} = useQuery({
-        queryKey: [STATIONS_QUERY_KEY, page],
+        queryKey: [page],
         queryFn: () => getStations(page, searhField),
     })
 
@@ -24,7 +21,6 @@ export const Stations = (): JSX.Element => {
         return <span>{error.message}</span>
       }
     }
-
 
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchField(e.target.value)

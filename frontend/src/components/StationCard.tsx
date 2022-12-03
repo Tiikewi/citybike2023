@@ -14,7 +14,6 @@ export const CustomCard = ({
   const cardClickHandler = () => {
   setIsCollapsed(!isCollapsed)
 }
-
   return (
     <div className="card" onClick={cardClickHandler}>
       <div className="top">
