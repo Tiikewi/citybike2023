@@ -3,6 +3,7 @@ package api
 import (
 	"citybike/pkg/db"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -13,6 +14,7 @@ const PAGE_LIMIT int = 10
 
 func handleJourneys(r chi.Router) {
 	r.Get("/page/{page}", getJourneys)
+	r.Get("/page/{page}/{sort}", getJourneys)
 }
 
 // @Summary Get journeys by page.
@@ -37,7 +39,14 @@ func getJourneys(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	journeys, err := db.GetJourneys(pageInt, PAGE_LIMIT)
+	sort := chi.URLParam(r, "sort")
+	sortInt, err := strconv.Atoi(sort)
+	if err != nil {
+		sortInt = 0
+	}
+	fmt.Println("SORT: ", sortInt)
+
+	journeys, err := db.GetJourneys(pageInt, PAGE_LIMIT, sortInt)
 	if err != nil {
 		sendJSONError(err.Error(), http.StatusInternalServerError, w)
 		return
