@@ -64,18 +64,18 @@ func GetJourneys(page int, limit int, sort int) ([]*types.Journey, error) {
 	return journeys, nil
 }
 
-func GetJourneyCount() (int, error) {
+// func GetJourneyCount() (int, error) {
 
-	row, err := DOT.QueryRow(DB, "get-journey-count")
-	if err != nil {
-		return -1, err
-	}
+// 	row, err := DOT.QueryRow(DB, "get-journey-count")
+// 	if err != nil {
+// 		return -1, err
+// 	}
 
-	var count int
+// 	var count int
 
-	if err := row.Scan(&count); err != nil {
-		panic("Error when fetching amount of journeys!")
-	}
+// 	if err := row.Scan(&count); err != nil {
+// 		panic("Error when fetching amount of journeys!")
+// 	}
 
-	return count, nil
-}
+// 	return count, nil
+// }

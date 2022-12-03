@@ -2,6 +2,7 @@ package db
 
 import (
 	"citybike/pkg/types"
+	"fmt"
 )
 
 func GetStations(page int, limit int) ([]*types.Station, error) {
@@ -11,7 +12,7 @@ func GetStations(page int, limit int) ([]*types.Station, error) {
 	} else {
 		from = (page * limit) - limit
 	}
-	rows, err := DOT.Query(DB, "get-stations", from, limit)
+	rows, err := DB.Query(fmt.Sprintf(getStationsQuery, from, limit))
 	if err != nil {
 		return nil, err
 	}
