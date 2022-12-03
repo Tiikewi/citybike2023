@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider, useIsFetching, useQueryClient } from '@tanstack/react-query';
 import { Routes, Route } from 'react-router-dom';
-import { PageLoadingSpinner } from './components/Spinner';
 import { Home } from './views/Home';
 import { Navbar } from './views/Navbar';
 import { Journeys } from './views/Journeys';

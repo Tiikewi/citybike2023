@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { CustomCard } from '../components/CustomCard'
+import { CustomCard } from '../components/StationCard'
 import { STATIONS_QUERY_KEY } from '../lib/apiRequests/queryKeys'
 import { getStations } from '../lib/apiRequests/stationRequest'
 import '../styles/stations.css'
@@ -66,7 +66,7 @@ export const Stations = (): JSX.Element => {
             <div className="stations">
                {data?.data === null ? (<p>No stations</p>) : (
                 data?.data.map(st =>  (
-                <CustomCard key={st.id} name={st.name} address={st.address} coordinates={st.coordinates}></CustomCard>
+                <CustomCard station={st}></CustomCard>
                 )))}
             </div>
         </div>
