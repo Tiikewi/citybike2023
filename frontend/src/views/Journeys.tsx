@@ -26,7 +26,7 @@ export enum Sort {
 
 export const Journeys = (): JSX.Element => {
   const [page, setPage] = useState(1)
-  const [sort, setSort] = useState(Sort.DepartureName)
+  const [sort, setSort] = useState(Sort.DepartureID)
 
 
     const { isError, data, error, refetch, isFetching} = useQuery({
@@ -54,10 +54,10 @@ return (
             <label>Sort by: <span className="sortItem">{Sort[sort]}</span></label>
             <br />
             <ButtonGroup>
+              <Button variant={sort === Sort.DepartureID ? 'success' : 'secondary'}
+                  onClick={() => onSort(Sort.DepartureID)}>Dep. ID</Button>
                 <Button variant={sort === Sort.DepartureName ? 'success' : 'secondary'}  
                     onClick={() => onSort(Sort.DepartureName)}>Dep. Name</Button>
-                <Button variant={sort === Sort.DepartureID ? 'success' : 'secondary'}
-                    onClick={() => onSort(Sort.DepartureID)}>Dep. ID</Button>
                 <Button variant={sort === Sort.ReturnName ? 'success' : 'secondary'} 
                     onClick={() => onSort(Sort.ReturnName)}>Ret. Name</Button>
                 <Button variant={sort === Sort.ReturnID ? 'success' : 'secondary'}
