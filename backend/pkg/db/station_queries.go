@@ -2,6 +2,7 @@ package db
 
 import (
 	"citybike/pkg/types"
+	"fmt"
 )
 
 func GetStations(page int, limit int) ([]*types.Station, error) {
@@ -11,7 +12,7 @@ func GetStations(page int, limit int) ([]*types.Station, error) {
 	} else {
 		from = (page * limit) - limit
 	}
-	rows, err := DOT.Query(DB, "get-stations", from, limit)
+	rows, err := DB.Query(fmt.Sprintf(getStationsQuery, from, limit))
 	if err != nil {
 		return nil, err
 	}
@@ -34,8 +35,8 @@ func GetStations(page int, limit int) ([]*types.Station, error) {
 		)
 		station.Coordinates = coordinates
 
-		counts, err := DOT.Query(DB, "get-ret-and-dep-count",
-			station.ID, station.ID)
+		counts, err := DB.Query(fmt.Sprintf(getRetAndDepCountQuery,
+			station.ID, station.ID))
 		if err != nil {
 			return nil, err
 		}
@@ -59,7 +60,7 @@ func GetStationsByName(page int, limit int, name string) ([]*types.Station, erro
 	}
 
 	// % for searching substrings.
-	rows, err := DOT.Query(DB, "get-stations-by-name", name+"%", from, limit)
+	rows, err := DB.Query(fmt.Sprintf(getStationsByNameQuery, name, from, limit))
 	if err != nil {
 		return nil, err
 	}
@@ -81,8 +82,8 @@ func GetStationsByName(page int, limit int, name string) ([]*types.Station, erro
 			&coordinates.Y,
 		)
 		station.Coordinates = coordinates
-		counts, err := DOT.Query(DB, "get-ret-and-dep-count",
-			station.ID, station.ID)
+		counts, err := DB.Query(fmt.Sprintf(getRetAndDepCountQuery,
+			station.ID, station.ID))
 		if err != nil {
 			return nil, err
 		}

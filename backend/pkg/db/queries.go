@@ -1,7 +1,6 @@
--- name: get-version
-SELECT VERSION()
+package db
 
--- name: create-journey-table
+const createJourneyTableQuery = `
 CREATE TABLE IF NOT EXISTS journey (
 	id                     INT auto_increment NOT NULL PRIMARY KEY,
 	departure_time         DATETIME NOT NULL,
@@ -15,9 +14,9 @@ CREATE TABLE IF NOT EXISTS journey (
     REFERENCES station(id),
     FOREIGN KEY(return_station_id)
     REFERENCES station(id)
-);
+)`
 
--- name: create-station-table
+const createStationTableQuery = `
 CREATE TABLE IF NOT EXISTS station (
 	fid                    INT NOT NULL,
     id                     INT NOT NULL PRIMARY KEY,
@@ -32,47 +31,36 @@ CREATE TABLE IF NOT EXISTS station (
     capacity               INT NOT NULL,
     x_coordinate           FLOAT NOT NULL,
     y_coordinate           FLOAT NOT NULL
-);
+)`
 
--- name: get-journeys
-SELECT j.*, s1.station_name_finnish, s2.station_name_finnish FROM journey j
-LEFT OUTER JOIN station s1 ON j.departure_station_id = s1.id
-LEFT OUTER JOIN station s2 ON return_station_id = s2.id
-LIMIT ?,?;
+const getJourneysQuery = `SELECT j.*, s1.station_name_finnish AS departure_station, 
+	s2.station_name_finnish AS return_station FROM journey j
+	LEFT OUTER JOIN station s1 ON j.departure_station_id = s1.id
+	LEFT OUTER JOIN station s2 ON return_station_id = s2.id
+	ORDER BY %s
+	LIMIT %d, %d`
 
--- name: get-journey-count
-SELECT count(*) AS exact_count FROM journey;
+const getStationsQuery = `SELECT fid, id, station_name_finnish, 
+	address_finnish, city_name_finnish, 
+	operator, capacity, x_coordinate, y_coordinate
+	FROM station LIMIT %d,%d;`
 
-
---name: get-stations
-SELECT fid, id, station_name_finnish, 
-address_finnish, city_name_finnish, 
-operator, capacity, x_coordinate, y_coordinate
-FROM station LIMIT ?,?;
-
-
---name: get-stations-by-name
-SELECT fid, id, station_name_finnish,
+const getStationsByNameQuery = `SELECT fid, id, station_name_finnish,
 address_finnish, city_name_finnish,
 operator, capacity, x_coordinate,
 y_coordinate 
 FROM station 
 WHERE station_name_finnish 
-LIKE ? LIMIT ?,?;
+LIKE "%s%%" LIMIT %d,%d;`
 
-
---name: get-ret-and-dep-count
-SELECT (
+const getRetAndDepCountQuery = `SELECT (
     SELECT COUNT(*)
     FROM   journey j
-    WHERE j.return_station_id = ?
+    WHERE j.return_station_id = %d
 ) AS tot_returns,
 (
 SELECT  (
     SELECT COUNT(*)
     FROM   journey j
-    WHERE j.departure_station_id = ?) 
-) AS tot_departures
-
---name: get-departure-count
-SELECT count(*) from journey WHERE departure_station_id = ?;
+    WHERE j.departure_station_id = %d) 
+) AS tot_departures`

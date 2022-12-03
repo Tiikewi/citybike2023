@@ -1,0 +1,8 @@
+.sort {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.sortItem {
+    font-weight: 700;
+}

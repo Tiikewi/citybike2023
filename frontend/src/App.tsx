@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider, useIsFetching } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, useIsFetching, useQueryClient } from '@tanstack/react-query';
 import { Routes, Route } from 'react-router-dom';
 import { PageLoadingSpinner } from './components/Spinner';
 import { Home } from './views/Home';
@@ -11,13 +11,10 @@ const queryClient = new QueryClient()
 
 const Content = (): JSX.Element => {
   // Access the client
-  // const queryClient = useQueryClient()
 
-  const isFetching = useIsFetching();
 
   return(
     <main>
-      {isFetching > 0 ? <PageLoadingSpinner /> : null}
       <Navbar />
       <div className="body">
         <Routes>
