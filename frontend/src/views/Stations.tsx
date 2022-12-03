@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { CustomCard } from '../components/CustomCard'
-import { STATIONS_QUERY_KEY } from '../lib/apiRequests/queryKeys'
+import { CustomCard } from '../components/StationCard'
 import { getStations } from '../lib/apiRequests/stationRequest'
 import '../styles/stations.css'
 import { GrNext, GrPrevious } from "react-icons/gr";
@@ -12,10 +11,8 @@ export const Stations = (): JSX.Element => {
     const [searhField, setSearchField] = useState('')
     const [page, setPage] = useState(1)
 
-
-    
     const { isError, data, error, refetch} = useQuery({
-        queryKey: [STATIONS_QUERY_KEY, page],
+        queryKey: [page],
         queryFn: () => getStations(page, searhField),
     })
 
@@ -24,7 +21,6 @@ export const Stations = (): JSX.Element => {
         return <span>{error.message}</span>
       }
     }
-
 
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchField(e.target.value)
@@ -66,7 +62,7 @@ export const Stations = (): JSX.Element => {
             <div className="stations">
                {data?.data === null ? (<p>No stations</p>) : (
                 data?.data.map(st =>  (
-                <CustomCard key={st.id} name={st.name} address={st.address} coordinates={st.coordinates}></CustomCard>
+                <CustomCard station={st}></CustomCard>
                 )))}
             </div>
         </div>

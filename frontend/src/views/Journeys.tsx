@@ -4,7 +4,6 @@ import { Button, ButtonGroup, Table } from "react-bootstrap";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { PageLoadingSpinner } from "../components/Spinner";
 import { getJourneys,} from "../lib/apiRequests/journeyRequests";
-import { JOURNEYS_QUERY_KEY } from "../lib/apiRequests/queryKeys";
 import "../styles/journeys.css"
 
 const formatDuration = (time: number) => {
@@ -20,17 +19,16 @@ export enum Sort {
   ReturnName = 3,
   ReturnID = 4,
   Distance = 5,
-  Duration = 6,
-
+  Duration = 6
 }
 
 export const Journeys = (): JSX.Element => {
   const [page, setPage] = useState(1)
-  const [sort, setSort] = useState(Sort.DepartureName)
+  const [sort, setSort] = useState(Sort.DepartureID)
 
 
     const { isError, data, error, refetch, isFetching} = useQuery({
-        queryKey: [JOURNEYS_QUERY_KEY, page, sort],
+        queryKey: [page, sort],
         queryFn: () => getJourneys(page, sort),
     })
 
@@ -54,10 +52,10 @@ return (
             <label>Sort by: <span className="sortItem">{Sort[sort]}</span></label>
             <br />
             <ButtonGroup>
+              <Button variant={sort === Sort.DepartureID ? 'success' : 'secondary'}
+                  onClick={() => onSort(Sort.DepartureID)}>Dep. ID</Button>
                 <Button variant={sort === Sort.DepartureName ? 'success' : 'secondary'}  
                     onClick={() => onSort(Sort.DepartureName)}>Dep. Name</Button>
-                <Button variant={sort === Sort.DepartureID ? 'success' : 'secondary'}
-                    onClick={() => onSort(Sort.DepartureID)}>Dep. ID</Button>
                 <Button variant={sort === Sort.ReturnName ? 'success' : 'secondary'} 
                     onClick={() => onSort(Sort.ReturnName)}>Ret. Name</Button>
                 <Button variant={sort === Sort.ReturnID ? 'success' : 'secondary'}
