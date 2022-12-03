@@ -2,6 +2,7 @@ import { useQuery} from "@tanstack/react-query";
 import { useState } from "react";
 import { Button, ButtonGroup, Table } from "react-bootstrap";
 import { GrNext, GrPrevious } from "react-icons/gr";
+import { PageLoadingSpinner } from "../components/Spinner";
 import { getJourneys,} from "../lib/apiRequests/journeyRequests";
 import { JOURNEYS_QUERY_KEY } from "../lib/apiRequests/queryKeys";
 import "../styles/journeys.css"
@@ -32,9 +33,9 @@ export const Journeys = (): JSX.Element => {
   const [sort, setSort] = useState(Sort.DepartureName)
 
 
-    const { isError, data, error} = useQuery({
-        queryKey: [JOURNEYS_QUERY_KEY, page],
-        queryFn: () => getJourneys(page),
+    const { isError, data, error, refetch, isFetching} = useQuery({
+        queryKey: [JOURNEYS_QUERY_KEY, page, sort],
+        queryFn: () => getJourneys(page, sort),
     })
 
     if(isError) {
@@ -42,8 +43,14 @@ export const Journeys = (): JSX.Element => {
         return <span>{error.message}</span>
       }
     }
+    if(isFetching) {
+      return   (<PageLoadingSpinner />)
+    }
 
-  
+    const onSort = (sortValue: Sort) => {
+      setSort(sortValue)
+      refetch()
+  }
 
 return (
   <div className="body">
@@ -52,17 +59,17 @@ return (
             <br />
             <ButtonGroup>
                 <Button variant={sort === Sort.DepartureName ? 'success' : 'secondary'}  
-                    onClick={() => setSort(Sort.DepartureName)}>Dep. Name</Button>
+                    onClick={() => onSort(Sort.DepartureName)}>Dep. Name</Button>
                 <Button variant={sort === Sort.DepartureID ? 'success' : 'secondary'}
-                    onClick={() => setSort(Sort.DepartureID)}>Dep. ID</Button>
+                    onClick={() => onSort(Sort.DepartureID)}>Dep. ID</Button>
                 <Button variant={sort === Sort.ReturnName ? 'success' : 'secondary'} 
-                    onClick={() => setSort(Sort.ReturnName)}>Ret. Name</Button>
+                    onClick={() => onSort(Sort.ReturnName)}>Ret. Name</Button>
                 <Button variant={sort === Sort.ReturnID ? 'success' : 'secondary'}
-                    onClick={() => setSort(Sort.ReturnID)}>Ret. ID</Button>
+                    onClick={() => onSort(Sort.ReturnID)}>Ret. ID</Button>
                 <Button variant={sort === Sort.Distance ? 'success' : 'secondary'} 
-                    onClick={() => setSort(Sort.Distance)}>Distance</Button>
+                    onClick={() => onSort(Sort.Distance)}>Distance</Button>
                 <Button variant={sort === Sort.Duration ? 'success' : 'secondary'}
-                    onClick={() => setSort(Sort.Duration)}>Duration</Button>
+                  onClick={() => onSort(Sort.Duration)}>Duration</Button>
             </ButtonGroup>
         </div>
       <Table striped>

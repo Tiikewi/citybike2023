@@ -13,5 +13,5 @@ type Journey = {
   duration: number
 }
 
-export const getJourneys = async (page: number): Promise<AxiosResponse<Journey[]>> =>
-  getAsync<Journey[]>(`/api/journeys/page/${page}`)
+export const getJourneys = async (page: number, sort: number): Promise<AxiosResponse<Journey[]>> =>
+  getAsync<Journey[]>(`/api/journeys/page/${page}/${sort}`)
