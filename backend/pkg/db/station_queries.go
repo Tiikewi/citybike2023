@@ -16,6 +16,7 @@ func GetStations(page int, limit int) ([]*types.Station, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
 
 	var stations []*types.Station
 
@@ -40,6 +41,7 @@ func GetStations(page int, limit int) ([]*types.Station, error) {
 		if err != nil {
 			return nil, err
 		}
+		defer counts.Close()
 
 		counts.Next()
 		counts.Scan(
@@ -64,6 +66,7 @@ func GetStationsByName(page int, limit int, name string) ([]*types.Station, erro
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
 
 	var stations []*types.Station
 
@@ -87,6 +90,7 @@ func GetStationsByName(page int, limit int, name string) ([]*types.Station, erro
 		if err != nil {
 			return nil, err
 		}
+		defer counts.Close()
 
 		counts.Next()
 		counts.Scan(

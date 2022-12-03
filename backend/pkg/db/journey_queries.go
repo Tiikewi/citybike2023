@@ -43,6 +43,7 @@ func GetJourneys(page int, limit int, sort int) ([]*types.Journey, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
 
 	var journeys []*types.Journey
 	for rows.Next() {
