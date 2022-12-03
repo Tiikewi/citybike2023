@@ -60,7 +60,7 @@ func GetStationsByName(page int, limit int, name string) ([]*types.Station, erro
 	}
 
 	// % for searching substrings.
-	rows, err := DOT.Query(DB, "get-stations-by-name", name+"%", from, limit)
+	rows, err := DB.Query(fmt.Sprintf(getStationsByNameQuery, name, from, limit))
 	if err != nil {
 		return nil, err
 	}

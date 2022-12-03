@@ -11,3 +11,11 @@ const getStationsQuery = `SELECT fid, id, station_name_finnish,
 	address_finnish, city_name_finnish, 
 	operator, capacity, x_coordinate, y_coordinate
 	FROM station LIMIT %d,%d;`
+
+const getStationsByNameQuery = `SELECT fid, id, station_name_finnish,
+address_finnish, city_name_finnish,
+operator, capacity, x_coordinate,
+y_coordinate 
+FROM station 
+WHERE station_name_finnish 
+LIKE "%s%%" LIMIT %d,%d;`
