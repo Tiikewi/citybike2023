@@ -3,7 +3,6 @@ package api
 import (
 	"citybike/pkg/db"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -44,7 +43,6 @@ func getJourneys(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		sortInt = 0
 	}
-	fmt.Println("SORT: ", sortInt)
 
 	journeys, err := db.GetJourneys(pageInt, PAGE_LIMIT, sortInt)
 	if err != nil {
