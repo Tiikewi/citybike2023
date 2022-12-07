@@ -2,7 +2,11 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
+	"log"
 	"net/http"
+	"os"
+	"path/filepath"
 
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
@@ -41,6 +45,8 @@ func (s *Server) MountHandlers() {
 
 	// Mount all handlers here
 
+	s.Router.Get("/*", serveSPA)
+
 	s.Router.Route("/api/journeys", handleJourneys)
 
 	s.Router.Route("/api/stations", handleStations)
@@ -52,4 +58,16 @@ func sendJSONError(msg string, status int, w http.ResponseWriter) {
 	w.WriteHeader(status)
 	jsonError := types.ErrorResponse{Message: msg, StatusCode: status}
 	json.NewEncoder(w).Encode(jsonError)
+}
+
+func serveSPA(w http.ResponseWriter, r *http.Request) {
+	workDir, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	filesDir := filepath.Join(workDir, "build")
+	if _, err := os.Stat(filesDir + r.URL.Path); errors.Is(err, os.ErrNotExist) {
+		http.ServeFile(w, r, filepath.Join(filesDir, "index.html"))
+	}
+	http.ServeFile(w, r, filesDir+r.URL.Path)
 }
