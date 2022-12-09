@@ -18,12 +18,12 @@ CREATE TABLE IF NOT EXISTS journey (
 
 const createStationTableQuery = `
 CREATE TABLE IF NOT EXISTS station (
-	fid                    INT NOT NULL,
+	fid                    INT NOT NULL AUTO_INCREMENT,
     id                     INT NOT NULL PRIMARY KEY,
-    station_name_finnish   VARCHAR(100) NOT NULL,
+    station_name_finnish   VARCHAR(100) NOT NULL UNIQUE,
     station_name_swedish   VARCHAR(100) NOT NULL,
     station_name_english   VARCHAR(100) NOT NULL,
-    address_finnish        VARCHAR(100) NOT NULL,
+    address_finnish        VARCHAR(100) NOT NULL UNIQUE,
     address_swedish        VARCHAR(100) NOT NULL,
     city_name_finnish      VARCHAR(100) NOT NULL,
     city_name_swedish      VARCHAR(100) NOT NULL,
