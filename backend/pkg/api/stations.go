@@ -2,16 +2,19 @@ package api
 
 import (
 	"citybike/pkg/db"
+	"citybike/pkg/types"
 	"encoding/json"
 	"net/http"
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-playground/validator/v10"
 )
 
 func handleStations(r chi.Router) {
 	r.Get("/page/{page}", getStations)
 	r.Get("/page/{page}/{name}", getStationsByName)
+	r.Post("/", addStation)
 }
 
 // @Summary Get stations by page.
@@ -88,4 +91,42 @@ func getStationsByName(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(stations)
+}
+
+// @Summary Add new station.
+// @Description POST api/stations to add new station.
+// @Tags Stations
+// @Produce json
+// @Router /api/stations [post]
+// @Body types.Station
+// @Param   addStationRequest body types.StationRequest true "New station"
+// @Success 200 {object} types.Station
+// @Failure 404 {object} types.ErrorResponse
+// @Failure 400 {object} types.ErrorResponse
+// @Failure 500 {object} types.ErrorResponse
+func addStation(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+
+	var st types.StationRequest
+
+	dec := json.NewDecoder(r.Body)
+	dec.DisallowUnknownFields()
+
+	err := dec.Decode(&st)
+	if err != nil {
+		sendJSONError("Invalid body", http.StatusBadRequest, w)
+		return
+	}
+
+	validate := validator.New()
+	if err := validate.Struct(st); err != nil {
+		sendJSONError("Invalid body", http.StatusBadRequest, w)
+		return
+	}
+
+	// TODO add to db
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(st)
 }
