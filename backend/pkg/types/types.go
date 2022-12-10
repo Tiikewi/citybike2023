@@ -1,6 +1,6 @@
 package types
 
-type ErrorResponse struct {
+type JSONResponse struct {
 	StatusCode int    `json:"statusCode"`
 	Message    string `json:"message"`
 }
@@ -40,7 +40,7 @@ type StationRequest struct {
 	Name        string      `json:"name" validate:"required"`
 	Address     string      `json:"address" validate:"required"`
 	City        string      `json:"city" validate:"required"`
-	Operator    string      `json:"operator,omitempty"`
-	Capacity    int         `json:"capacity,omitempty"`
+	Operator    string      `json:"operator"`
+	Capacity    int         `json:"capacity"`
 	Coordinates Coordinates `json:"coordinates" validate:"required"`
 }

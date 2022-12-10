@@ -23,9 +23,9 @@ func handleJourneys(r chi.Router) {
 // @Param page path int true "Page number"
 // @Router /api/journeys/page/{page} [get]
 // @Success 200 {object} types.Journey
-// @Failure 404 {object} types.ErrorResponse
-// @Failure 400 {object} types.ErrorResponse
-// @Failure 500 {object} types.ErrorResponse
+// @Failure 404 {object} types.JSONResponse
+// @Failure 400 {object} types.JSONResponse
+// @Failure 500 {object} types.JSONResponse
 func getJourneys(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
@@ -34,7 +34,7 @@ func getJourneys(w http.ResponseWriter, r *http.Request) {
 	pageInt, err := strconv.Atoi(page)
 
 	if err != nil || pageInt < 1 {
-		sendJSONError("Invalid parameters", http.StatusBadRequest, w)
+		sendJSONResponse("Invalid parameters", http.StatusBadRequest, w)
 		return
 	}
 
@@ -46,12 +46,12 @@ func getJourneys(w http.ResponseWriter, r *http.Request) {
 
 	journeys, err := db.GetJourneys(pageInt, PAGE_LIMIT, sortInt)
 	if err != nil {
-		sendJSONError(err.Error(), http.StatusInternalServerError, w)
+		sendJSONResponse(err.Error(), http.StatusInternalServerError, w)
 		return
 	}
 
 	if len(journeys) == 0 {
-		sendJSONError("No journeys found", http.StatusNotFound, w)
+		sendJSONResponse("No journeys found", http.StatusNotFound, w)
 		return
 	}
 

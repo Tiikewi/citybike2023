@@ -54,9 +54,9 @@ func (s *Server) MountHandlers() {
 }
 
 // @Summary Send error as JSON with given params..
-func sendJSONError(msg string, status int, w http.ResponseWriter) {
+func sendJSONResponse(msg string, status int, w http.ResponseWriter) {
 	w.WriteHeader(status)
-	jsonError := types.ErrorResponse{Message: msg, StatusCode: status}
+	jsonError := types.JSONResponse{Message: msg, StatusCode: status}
 	json.NewEncoder(w).Encode(jsonError)
 }
 

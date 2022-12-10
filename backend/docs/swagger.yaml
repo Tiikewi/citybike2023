@@ -9,7 +9,7 @@ definitions:
     - x
     - "y"
     type: object
-  types.ErrorResponse:
+  types.JSONResponse:
     properties:
       message:
         type: string
@@ -110,15 +110,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
       summary: Get journeys by page.
       tags:
       - Journeys
@@ -142,15 +142,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
       summary: Add new station.
       tags:
       - Stations
@@ -173,15 +173,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
       summary: Get stations by page.
       tags:
       - Stations
@@ -209,15 +209,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/types.ErrorResponse'
+            $ref: '#/definitions/types.JSONResponse'
       summary: Get stations by name.
       tags:
       - Stations
