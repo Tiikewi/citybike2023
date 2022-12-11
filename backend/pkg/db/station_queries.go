@@ -102,3 +102,20 @@ func GetStationsByName(page int, limit int, name string) ([]*types.Station, erro
 
 	return stations, nil
 }
+
+func AddStation(newStation *types.StationRequest) error {
+	_, err := DB.Exec(fmt.Sprintf(
+		insertStation,
+		newStation.ID,
+		newStation.Name,
+		newStation.Address,
+		newStation.City,
+		newStation.Operator,
+		newStation.Capacity,
+		newStation.Coordinates.X,
+		newStation.Coordinates.Y))
+	if err != nil {
+		return err
+	}
+	return nil
+}

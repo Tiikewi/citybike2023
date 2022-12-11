@@ -47,19 +47,62 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/types.ErrorResponse"
+                            "$ref": "#/definitions/types.JSONResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/types.ErrorResponse"
+                            "$ref": "#/definitions/types.JSONResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/types.ErrorResponse"
+                            "$ref": "#/definitions/types.JSONResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/stations": {
+            "post": {
+                "description": "POST api/stations to add new station.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Stations"
+                ],
+                "summary": "Add new station.",
+                "parameters": [
+                    {
+                        "description": "New station",
+                        "name": "addStationRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.StationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/types.JSONResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/types.JSONResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/types.JSONResponse"
                         }
                     }
                 }
@@ -94,19 +137,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/types.ErrorResponse"
+                            "$ref": "#/definitions/types.JSONResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/types.ErrorResponse"
+                            "$ref": "#/definitions/types.JSONResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/types.ErrorResponse"
+                            "$ref": "#/definitions/types.JSONResponse"
                         }
                     }
                 }
@@ -148,19 +191,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/types.ErrorResponse"
+                            "$ref": "#/definitions/types.JSONResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/types.ErrorResponse"
+                            "$ref": "#/definitions/types.JSONResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/types.ErrorResponse"
+                            "$ref": "#/definitions/types.JSONResponse"
                         }
                     }
                 }
@@ -170,6 +213,10 @@ const docTemplate = `{
     "definitions": {
         "types.Coordinates": {
             "type": "object",
+            "required": [
+                "x",
+                "y"
+            ],
             "properties": {
                 "x": {
                     "type": "number"
@@ -179,7 +226,7 @@ const docTemplate = `{
                 }
             }
         },
-        "types.ErrorResponse": {
+        "types.JSONResponse": {
             "type": "object",
             "properties": {
                 "message": {
@@ -254,6 +301,39 @@ const docTemplate = `{
                 },
                 "returns": {
                     "type": "integer"
+                }
+            }
+        },
+        "types.StationRequest": {
+            "type": "object",
+            "required": [
+                "address",
+                "city",
+                "coordinates",
+                "id",
+                "name"
+            ],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "capacity": {
+                    "type": "integer"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "coordinates": {
+                    "$ref": "#/definitions/types.Coordinates"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "operator": {
+                    "type": "string"
                 }
             }
         }

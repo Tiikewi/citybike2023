@@ -1,5 +1,7 @@
 package db
 
+// CREATE TABLES
+
 const createJourneyTableQuery = `
 CREATE TABLE IF NOT EXISTS journey (
 	id                     INT auto_increment NOT NULL PRIMARY KEY,
@@ -18,20 +20,22 @@ CREATE TABLE IF NOT EXISTS journey (
 
 const createStationTableQuery = `
 CREATE TABLE IF NOT EXISTS station (
-	fid                    INT NOT NULL,
+	fid                    INT DEFAULT 0,
     id                     INT NOT NULL PRIMARY KEY,
-    station_name_finnish   VARCHAR(100) NOT NULL,
-    station_name_swedish   VARCHAR(100) NOT NULL,
-    station_name_english   VARCHAR(100) NOT NULL,
-    address_finnish        VARCHAR(100) NOT NULL,
-    address_swedish        VARCHAR(100) NOT NULL,
+    station_name_finnish   VARCHAR(100) NOT NULL UNIQUE,
+    station_name_swedish   VARCHAR(100),
+    station_name_english   VARCHAR(100),
+    address_finnish        VARCHAR(100) NOT NULL UNIQUE,
+    address_swedish        VARCHAR(100),
     city_name_finnish      VARCHAR(100) NOT NULL,
-    city_name_swedish      VARCHAR(100) NOT NULL,
+    city_name_swedish      VARCHAR(100),
     operator               VARCHAR(100),
-    capacity               INT NOT NULL,
+    capacity               INT,
     x_coordinate           FLOAT NOT NULL,
     y_coordinate           FLOAT NOT NULL
 )`
+
+// JOURNEYS
 
 const getJourneysQuery = `SELECT j.*, s1.station_name_finnish AS departure_station, 
 	s2.station_name_finnish AS return_station FROM journey j
@@ -40,6 +44,7 @@ const getJourneysQuery = `SELECT j.*, s1.station_name_finnish AS departure_stati
 	ORDER BY %s
 	LIMIT %d, %d`
 
+// STATIONS
 const getStationsQuery = `SELECT fid, id, station_name_finnish, 
 	address_finnish, city_name_finnish, 
 	operator, capacity, x_coordinate, y_coordinate
@@ -64,3 +69,9 @@ SELECT  (
     FROM   journey j
     WHERE j.departure_station_id = %d) 
 ) AS tot_departures`
+
+const insertStation = `INSERT INTO station 
+    (id, station_name_finnish, address_finnish, 
+    city_name_finnish, operator, capacity, 
+    x_coordinate, y_coordinate)
+    VALUES (%d, '%s', '%s', '%s', '%s', %d, %f, %f);`

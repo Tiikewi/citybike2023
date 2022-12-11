@@ -1,6 +1,6 @@
 package types
 
-type ErrorResponse struct {
+type JSONResponse struct {
 	StatusCode int    `json:"statusCode"`
 	Message    string `json:"message"`
 }
@@ -18,8 +18,8 @@ type Journey struct {
 }
 
 type Coordinates struct {
-	X float64 `json:"x"`
-	Y float64 `json:"y"`
+	X float64 `json:"x" validate:"required"`
+	Y float64 `json:"y" validate:"required"`
 }
 
 type Station struct {
@@ -33,4 +33,14 @@ type Station struct {
 	Coordinates Coordinates `json:"coordinates"`
 	Returns     int         `json:"returns"`
 	Departures  int         `json:"departures"`
+}
+
+type StationRequest struct {
+	ID          int         `json:"id" validate:"required"`
+	Name        string      `json:"name" validate:"required"`
+	Address     string      `json:"address" validate:"required"`
+	City        string      `json:"city" validate:"required"`
+	Operator    string      `json:"operator"`
+	Capacity    int         `json:"capacity"`
+	Coordinates Coordinates `json:"coordinates" validate:"required"`
 }
