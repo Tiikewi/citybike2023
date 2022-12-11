@@ -13,9 +13,9 @@ var DB *sql.DB
 
 var (
 	// host            = os.Getenv("MYSQL_HOST")
-	dbContainerName = "citybike-mariadb"
+	dbContainerName = os.Getenv("MYSQL_CONTAINER")
 	user            = os.Getenv("MYSQL_USER")
-	password        = os.Getenv("MYSQL_PASSWORD")
+	password        = os.Getenv("MYSQL_ROOT_PASSWORD")
 	dbname          = os.Getenv("MYSQL_DATABASE")
 )
 
