@@ -98,7 +98,7 @@ func getStationsByName(w http.ResponseWriter, r *http.Request) {
 // @Tags Stations
 // @Produce json
 // @Router /api/stations [post]
-// @Body types.Station
+// @Body types.StationRequest
 // @Param   addStationRequest body types.StationRequest true "New station"
 // @Success 200 {object} types.JSONResponse
 // @Failure 400 {object} types.JSONResponse

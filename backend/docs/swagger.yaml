@@ -37,6 +37,30 @@ definitions:
       returnTime:
         type: string
     type: object
+  types.JourneyRequest:
+    properties:
+      departureStationId:
+        type: integer
+      departureTime:
+        type: string
+      distance:
+        minimum: 10
+        type: integer
+      duration:
+        minimum: 10
+        type: integer
+      returnStationId:
+        type: integer
+      returnTime:
+        type: string
+    required:
+    - departureStationId
+    - departureTime
+    - distance
+    - duration
+    - returnStationId
+    - returnTime
+    type: object
   types.Station:
     properties:
       address:
@@ -91,6 +115,34 @@ info:
   title: Citybike 2023
   version: "0.1"
 paths:
+  /api/journeys:
+    post:
+      description: POST api/journeys to add new journey.
+      parameters:
+      - description: New journey
+        in: body
+        name: addJourneyRequest
+        required: true
+        schema:
+          $ref: '#/definitions/types.JourneyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.JSONResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/types.JSONResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/types.JSONResponse'
+      summary: Add new journey.
+      tags:
+      - Journeys
   /api/journeys/page/{page}:
     get:
       description: GET /api/journeys/{page} returns 10 * page amount of journeys.

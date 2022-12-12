@@ -18,6 +18,49 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/journeys": {
+            "post": {
+                "description": "POST api/journeys to add new journey.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Journeys"
+                ],
+                "summary": "Add new journey.",
+                "parameters": [
+                    {
+                        "description": "New journey",
+                        "name": "addJourneyRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.JourneyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/types.JSONResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/types.JSONResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/types.JSONResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/api/journeys/page/{page}": {
             "get": {
                 "description": "GET /api/journeys/{page} returns 10 * page amount of journeys.",
@@ -263,6 +306,39 @@ const docTemplate = `{
                 },
                 "returnStationName": {
                     "type": "string"
+                },
+                "returnTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "types.JourneyRequest": {
+            "type": "object",
+            "required": [
+                "departureStationId",
+                "departureTime",
+                "distance",
+                "duration",
+                "returnStationId",
+                "returnTime"
+            ],
+            "properties": {
+                "departureStationId": {
+                    "type": "integer"
+                },
+                "departureTime": {
+                    "type": "string"
+                },
+                "distance": {
+                    "type": "integer",
+                    "minimum": 10
+                },
+                "duration": {
+                    "type": "integer",
+                    "minimum": 10
+                },
+                "returnStationId": {
+                    "type": "integer"
                 },
                 "returnTime": {
                     "type": "string"
