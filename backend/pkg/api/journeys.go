@@ -104,7 +104,12 @@ func addJourney(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	err = db.AddJourney(&journey)
+	if err != nil {
+		sendJSONResponse(err.Error(), http.StatusInternalServerError, w)
+		return
+	}
+
 	w.WriteHeader(http.StatusOK)
-	// sendJSONResponse("Station added succesfully!", http.StatusOK, w)
-	json.NewEncoder(w).Encode(journey)
+	sendJSONResponse("Journey added succesfully!", http.StatusOK, w)
 }

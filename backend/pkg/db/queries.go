@@ -75,3 +75,8 @@ const insertStation = `INSERT INTO station
     city_name_finnish, operator, capacity, 
     x_coordinate, y_coordinate)
     VALUES (%d, '%s', '%s', '%s', '%s', %d, %f, %f);`
+
+const insertJourney = `INSERT INTO journey 
+    (departure_time, return_time, departure_station_id, 
+    return_station_id, distance, duration)
+    VALUES ('%s', '%s', %d, %d, %d, %d);`
