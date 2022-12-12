@@ -17,6 +17,15 @@ type Journey struct {
 	Duration       int    `json:"duration"`
 }
 
+type JourneyRequest struct {
+	DepTime      string `json:"departureTime" validate:"required"`
+	RetTime      string `json:"returnTime" validate:"required"`
+	DepStationId int    `json:"departureStationId" validate:"required"`
+	RetStationId int    `json:"returnStationId" validate:"required"`
+	Distance     int    `json:"distance" validate:"required,min=10"`
+	Duration     int    `json:"duration" validate:"required,min=10"`
+}
+
 type Coordinates struct {
 	X float64 `json:"x" validate:"required"`
 	Y float64 `json:"y" validate:"required"`
