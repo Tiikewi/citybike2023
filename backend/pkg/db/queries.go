@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS station (
     station_name_finnish   VARCHAR(100) NOT NULL UNIQUE,
     station_name_swedish   VARCHAR(100),
     station_name_english   VARCHAR(100),
-    address_finnish        VARCHAR(100) NOT NULL UNIQUE,
+    address_finnish        VARCHAR(100) NOT NULL,
     address_swedish        VARCHAR(100),
     city_name_finnish      VARCHAR(100) NOT NULL,
     city_name_swedish      VARCHAR(100),
