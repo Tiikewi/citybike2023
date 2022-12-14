@@ -51,6 +51,10 @@ Go and Mariadb are running in containers. There is a docker-compose file to star
 Frontend is made with React using Typescript.
 Using TanStack Query.
 
+### DigitalOcean
+
+App is also up and running on web using DigitalOcean as service provider.
+
 ## TODOS
 
 - Really improve and implement tests
