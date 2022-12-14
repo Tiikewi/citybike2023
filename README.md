@@ -4,7 +4,7 @@ This is the pre-assignment for Solita Dev Academy 2023.
 
 Citybike is app for displaying data of journeys made with city bikes in Helsinki Capital area.
 
-### You can access running version of this app in [tiikewi.fi](https::/www.tiikewi.fi)
+### You can access running version of this app in [tiikewi.fi](https://tiikewi.fi/)
 
 ## Installation
 
