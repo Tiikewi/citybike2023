@@ -19,6 +19,8 @@ docker-compose up
 
 This starts MariaDB database and go backend with reflex, for ease of develompment.
 If no .env variable given, backend should be up and running in **localhost:8080**.
+After starting backend you can access the swagger documentation in
+**http://localhost:8080/api/swagger/index.html**
 
 ### To run frontend:
 
