@@ -12,7 +12,6 @@ import (
 var DB *sql.DB
 
 var (
-	// host            = os.Getenv("MYSQL_HOST")
 	dbContainerName = os.Getenv("MYSQL_CONTAINER")
 	user            = os.Getenv("MYSQL_USER")
 	password        = os.Getenv("MYSQL_ROOT_PASSWORD")
@@ -28,9 +27,6 @@ func ConnectToDB() {
 	}
 
 	DB = db
-
-	// // Print version of mariadb.
-	// fmt.Println("Connected to MariaDB version: ", GetVersion())
 
 	CreateTables()
 

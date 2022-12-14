@@ -2,6 +2,7 @@ package db
 
 import (
 	"citybike/pkg/types"
+	"database/sql"
 	"fmt"
 )
 
@@ -21,20 +22,7 @@ func GetStations(page int, limit int) ([]*types.Station, error) {
 	var stations []*types.Station
 
 	for rows.Next() {
-		var station types.Station
-		var coordinates types.Coordinates
-		rows.Scan(
-			&station.FID,
-			&station.ID,
-			&station.Name,
-			&station.Address,
-			&station.City,
-			&station.Operator,
-			&station.Capacity,
-			&coordinates.X,
-			&coordinates.Y,
-		)
-		station.Coordinates = coordinates
+		station := scanStation(rows)
 
 		counts, err := DB.Query(fmt.Sprintf(getRetAndDepCountQuery,
 			station.ID, station.ID))
@@ -61,7 +49,6 @@ func GetStationsByName(page int, limit int, name string) ([]*types.Station, erro
 		from = (page * limit) - limit
 	}
 
-	// % for searching substrings.
 	rows, err := DB.Query(fmt.Sprintf(getStationsByNameQuery, name, from, limit))
 	if err != nil {
 		return nil, err
@@ -71,20 +58,8 @@ func GetStationsByName(page int, limit int, name string) ([]*types.Station, erro
 	var stations []*types.Station
 
 	for rows.Next() {
-		var station types.Station
-		var coordinates types.Coordinates
-		rows.Scan(
-			&station.FID,
-			&station.ID,
-			&station.Name,
-			&station.Address,
-			&station.City,
-			&station.Operator,
-			&station.Capacity,
-			&coordinates.X,
-			&coordinates.Y,
-		)
-		station.Coordinates = coordinates
+		station := scanStation(rows)
+
 		counts, err := DB.Query(fmt.Sprintf(getRetAndDepCountQuery,
 			station.ID, station.ID))
 		if err != nil {
@@ -118,4 +93,23 @@ func AddStation(newStation *types.StationRequest) error {
 		return err
 	}
 	return nil
+}
+
+func scanStation(rows *sql.Rows) types.Station {
+	var station types.Station
+	var coordinates types.Coordinates
+	rows.Scan(
+		&station.FID,
+		&station.ID,
+		&station.Name,
+		&station.Address,
+		&station.City,
+		&station.Operator,
+		&station.Capacity,
+		&coordinates.X,
+		&coordinates.Y,
+	)
+	station.Coordinates = coordinates
+
+	return station
 }
