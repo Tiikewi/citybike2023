@@ -4,6 +4,8 @@ This is the pre-assignment for Solita Dev Academy 2023.
 
 Citybike is app for displaying data of journeys made with city bikes in Helsinki Capital area.
 
+### You can access running version of this app in [tiikewi.fi](https::/www.tiikewi.fi)
+
 ## Installation
 
 Commands from app directory root.
@@ -37,16 +39,21 @@ Backend also includes csv file handler for validating journey data.
 
 ### MariaDB
 
-TODO
+Using MariaDB.
+Validated CSV files inserted to db as CSV by using DBeaver.
 
 ### Docker
 
-Go and Mariadb are running in containers. There is a docker-compose file to start them both.
+Go and Mariadb are running in containers. There is a docker-compose file to start them.
 
 ### React
 
 Frontend is made with React using Typescript.
+Using TanStack Query.
 
 ## TODOS
 
---
+- Really improve and implement tests
+- Make UI responsive for various screen sizes
+- UI element for creating journeys/stations
+- Improve CSV reading and validation and perhaps add ability to add csv files to db from client.
