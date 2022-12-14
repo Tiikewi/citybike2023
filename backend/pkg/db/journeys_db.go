@@ -65,18 +65,17 @@ func GetJourneys(page int, limit int, sort int) ([]*types.Journey, error) {
 	return journeys, nil
 }
 
-// func GetJourneyCount() (int, error) {
+func AddJourney(newJourney *types.JourneyRequest) error {
+	_, err := DB.Exec(fmt.Sprintf(insertJourney,
+		newJourney.DepTime,
+		newJourney.RetTime,
+		newJourney.DepStationId,
+		newJourney.RetStationId,
+		newJourney.Distance,
+		newJourney.Duration))
 
-// 	row, err := DOT.QueryRow(DB, "get-journey-count")
-// 	if err != nil {
-// 		return -1, err
-// 	}
-
-// 	var count int
-
-// 	if err := row.Scan(&count); err != nil {
-// 		panic("Error when fetching amount of journeys!")
-// 	}
-
-// 	return count, nil
-// }
+	if err != nil {
+		return err
+	}
+	return nil
+}

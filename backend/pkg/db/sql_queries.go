@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS station (
     station_name_finnish   VARCHAR(100) NOT NULL UNIQUE,
     station_name_swedish   VARCHAR(100),
     station_name_english   VARCHAR(100),
-    address_finnish        VARCHAR(100) NOT NULL UNIQUE,
+    address_finnish        VARCHAR(100) NOT NULL,
     address_swedish        VARCHAR(100),
     city_name_finnish      VARCHAR(100) NOT NULL,
     city_name_swedish      VARCHAR(100),
@@ -75,3 +75,8 @@ const insertStation = `INSERT INTO station
     city_name_finnish, operator, capacity, 
     x_coordinate, y_coordinate)
     VALUES (%d, '%s', '%s', '%s', '%s', %d, %f, %f);`
+
+const insertJourney = `INSERT INTO journey 
+    (departure_time, return_time, departure_station_id, 
+    return_station_id, distance, duration)
+    VALUES ('%s', '%s', %d, %d, %d, %d);`

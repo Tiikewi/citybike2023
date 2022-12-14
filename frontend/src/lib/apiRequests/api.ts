@@ -1,9 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const AXIOS_CONFIG: AxiosRequestConfig = {
-  // Could be in .env file.
-  baseURL: 'http://localhost:8080',
-  //baseURL: process.env.REACT_APP_BACKEND_URL,
+  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080',
 }
 
 export const getAsync = async <Response>(url: string): Promise<AxiosResponse<Response>> =>
