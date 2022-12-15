@@ -10,7 +10,7 @@ const render = (status: Status) => {
   return <h1>{status}</h1>;
 };
 
-export const CustomCard = ({
+export const StationCard = ({
   station,
 }: {
   station: Station;
