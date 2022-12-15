@@ -12,7 +12,6 @@ const render = (status: Status) => {
 // DO NOT STORE SECRETS ON REACT APP!
 // api key I use on tiikewi.fi is restricted to spesific IP.
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_MAPS_API_KEY || ""
-console.log("APIKEY: ", GOOGLE_MAPS_API_KEY)
 
 export const StationCard = ({
   station,
