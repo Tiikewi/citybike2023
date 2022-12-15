@@ -5,17 +5,21 @@ import { Station } from "../lib/apiRequests/stationRequest";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import {Map} from "./Map"
 
-
 const render = (status: Status) => {
   return <h1>{status}</h1>;
 };
+
+// DO NOT STORE SECRETS ON REACT APP!
+// api key I use on tiikewi.fi is restricted to spesific IP.
+const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_MAPS_API_KEY || ""
+console.log("APIKEY: ", GOOGLE_MAPS_API_KEY)
 
 export const StationCard = ({
   station,
 }: {
   station: Station;
 }) => {
-
+  
   const [isCollapsed, setIsCollapsed] = useState(true)
 
   const cardClickHandler = () => {
@@ -48,9 +52,9 @@ export const StationCard = ({
             </tr>
           </tbody>
         </Table>
-        <Wrapper apiKey={"AIzaSyBug5bfs8jrJ3LjGcQa6Iwc4ZljHjM_LJw"} render={render}>
-                <Map lat={station.coordinates.y} lng={station.coordinates.x}/>
-            </Wrapper>
+        <Wrapper apiKey={GOOGLE_MAPS_API_KEY} render={render}>
+          <Map lat={station.coordinates.y} lng={station.coordinates.x}/>
+        </Wrapper>
       </div>
     </div>
   );
