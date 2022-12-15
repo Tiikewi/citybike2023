@@ -22,11 +22,12 @@ export const StationCard = ({
   const [isCollapsed, setIsCollapsed] = useState(true)
 
   const cardClickHandler = () => {
-  setIsCollapsed(!isCollapsed)
-}
+    setIsCollapsed(!isCollapsed)
+  }
+
   return (
-    <div className="card" onClick={cardClickHandler}>
-      <div className="top">
+    <div className="card">
+      <div className="top" onClick={cardClickHandler}>
         <h3>{station.name}</h3>
         <span className="icon">
           <FiChevronDown />
