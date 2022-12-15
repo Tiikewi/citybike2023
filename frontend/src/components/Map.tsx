@@ -19,6 +19,3 @@ export const Map: React.FC<{lat: number, lng: number}> = ({lat, lng}) => {
 
     return <div ref={ref} style={{width: "100%", height: "100%", margin: "8px"}} />
 }
-
-
-  
