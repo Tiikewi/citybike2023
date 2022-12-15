@@ -2,9 +2,6 @@ import '../styles/home.css'
 
 
 export const Home = (): JSX.Element => {
-
-  
-
     return(
       <div className='body'>
         <h1>Citybike 2023</h1>
@@ -20,7 +17,6 @@ export const Home = (): JSX.Element => {
             <li>UI element for creating journeys/stations</li>
             <li>Improve CSV reading and validation and perhaps add ability to add csv files to db from client.</li>
           </ul>
-
         </div>
     )
   }
