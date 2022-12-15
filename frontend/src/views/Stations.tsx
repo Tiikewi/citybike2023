@@ -8,6 +8,8 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 
 
 export const Stations = (): JSX.Element => {
+  
+
     const [searhField, setSearchField] = useState('')
     const [page, setPage] = useState(1)
 
@@ -40,6 +42,7 @@ export const Stations = (): JSX.Element => {
 
     return(
         <div className='body'>
+
             <Form onSubmit={(e) => e.preventDefault()}  onKeyDown={handleKeyDown}>
                 <Form.Group className="mb-3">
                     <Form.Control onChange={onInputChange} type="text" placeholder="Station name" value={searhField} />
@@ -65,6 +68,10 @@ export const Stations = (): JSX.Element => {
                 <CustomCard station={st}></CustomCard>
                 )))}
             </div>
+
+
         </div>
     )
 }
+
+

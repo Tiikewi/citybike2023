@@ -2,6 +2,13 @@ import { useState } from "react";
 import { Table } from "react-bootstrap";
 import { FiChevronDown } from "react-icons/fi";
 import { Station } from "../lib/apiRequests/stationRequest";
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import {Map} from "./Map"
+
+
+const render = (status: Status) => {
+  return <h1>{status}</h1>;
+};
 
 export const CustomCard = ({
   station,
@@ -41,6 +48,9 @@ export const CustomCard = ({
             </tr>
           </tbody>
         </Table>
+        <Wrapper apiKey={"AIzaSyBug5bfs8jrJ3LjGcQa6Iwc4ZljHjM_LJw"} render={render}>
+                <Map lat={station.coordinates.y} lng={station.coordinates.x}/>
+            </Wrapper>
       </div>
     </div>
   );
