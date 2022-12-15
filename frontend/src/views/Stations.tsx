@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { CustomCard } from '../components/StationCard'
+import { StationCard } from '../components/StationCard'
 import { getStations } from '../lib/apiRequests/stationRequest'
 import '../styles/stations.css'
 import { GrNext, GrPrevious } from "react-icons/gr";
 
 
 export const Stations = (): JSX.Element => {
+  
+
     const [searhField, setSearchField] = useState('')
     const [page, setPage] = useState(1)
 
@@ -40,6 +42,7 @@ export const Stations = (): JSX.Element => {
 
     return(
         <div className='body'>
+
             <Form onSubmit={(e) => e.preventDefault()}  onKeyDown={handleKeyDown}>
                 <Form.Group className="mb-3">
                     <Form.Control onChange={onInputChange} type="text" placeholder="Station name" value={searhField} />
@@ -62,9 +65,13 @@ export const Stations = (): JSX.Element => {
             <div className="stations">
                {data?.data === null ? (<p>No stations</p>) : (
                 data?.data.map(st =>  (
-                <CustomCard station={st}></CustomCard>
+                <StationCard station={st}></StationCard>
                 )))}
             </div>
+
+
         </div>
     )
 }
+
+

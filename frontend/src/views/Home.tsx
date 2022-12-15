@@ -1,5 +1,6 @@
 import '../styles/home.css'
 
+
 export const Home = (): JSX.Element => {
     return(
       <div className='body'>
