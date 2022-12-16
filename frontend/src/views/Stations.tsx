@@ -5,6 +5,7 @@ import { StationCard } from '../components/StationCard'
 import { getStations } from '../lib/apiRequests/stationRequest'
 import '../styles/stations.css'
 import { GrNext, GrPrevious } from "react-icons/gr";
+import { PageLoadingSpinner } from '../components/Spinner'
 
 
 export const Stations = (): JSX.Element => {
@@ -13,7 +14,7 @@ export const Stations = (): JSX.Element => {
     const [searhField, setSearchField] = useState('')
     const [page, setPage] = useState(1)
 
-    const { isError, data, error, refetch} = useQuery({
+    const { isError, data, error, refetch, isFetching} = useQuery({
         queryKey: [page],
         queryFn: () => getStations(page, searhField),
     })
@@ -61,17 +62,15 @@ export const Stations = (): JSX.Element => {
                 {/* TODO prevent page going over avaible pages. */}
                 <Button onClick={() => setPage(page + 1)} variant='white'><GrNext /></Button>
             </div>
-
+            
+           {isFetching ?  <PageLoadingSpinner /> :
             <div className="stations">
                {data?.data === null ? (<p>No stations</p>) : (
                 data?.data.map(st =>  (
                 <StationCard station={st}></StationCard>
                 )))}
             </div>
-
-
+            }
         </div>
     )
 }
-
-
