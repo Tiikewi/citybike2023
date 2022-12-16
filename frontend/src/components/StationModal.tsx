@@ -17,11 +17,20 @@ let newSt: newStation;
 export const StationModal = () => {
   const [show, setShow] = useState(false);
   const [station, setStation] = useState<newStation>(newSt);
+  const [validated, setValidated] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleAdd = () => {
-    
-      setShow(false);
+  const handleAdd = (event: any) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+      setValidated(true);
+
+      if (validated) {
+        setShow(false);
+      }
   }
   const handleShow = () => setShow(true);
 
@@ -36,7 +45,7 @@ export const StationModal = () => {
           <Modal.Title>Add new station</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form noValidate validated={validated} onSubmit={handleAdd}>
             <Form.Group className="mb-3" controlId="stationInfo">
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -44,24 +53,28 @@ export const StationModal = () => {
                 type="text"
                 placeholder="Station name"
                 autoFocus
+                required
               />
               <Form.Label>Address</Form.Label>
               <Form.Control
                 onChange={(e) => setStation({...station, address: e.target.value})}
                 type="text"
                 placeholder="Station address"
+                required
               />
             <Form.Label>ID</Form.Label>
               <Form.Control
                 onChange={(e) => setStation({...station, id: Number(e.target.value)})}
                 type="number"
                 placeholder="Station ID"
+                required
                 />
             <Form.Label>City</Form.Label>
               <Form.Control
                 onChange={(e) => setStation({...station, city: e.target.value})}
                 type="text"
                 placeholder="City name"
+                required
                 />
               <Form.Label>Coordinates</Form.Label>
               <Form.Control
@@ -69,12 +82,14 @@ export const StationModal = () => {
                 type="number"
                 step="0.01"
                 placeholder="latitude"
+                required
                 />
                 <Form.Control
                 onChange={(e) => setStation({...station, coordinates: {...station.coordinates, x: Number(e.target.value)}})}
                 type="number"
                 step="0.01"
                 placeholder="longitude"
+                required
                 />
             <Form.Label>Capacity</Form.Label>
               <Form.Control
@@ -90,15 +105,16 @@ export const StationModal = () => {
                 placeholder="Operator"
                 />
             </Form.Group>
+            <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" type='submit'>
+            Add
+          </Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleAdd}>
-            Add
-          </Button>
+   
         </Modal.Footer>
       </Modal>
       </div>
