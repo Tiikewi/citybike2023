@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, ChangeEventHandler, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -40,45 +40,54 @@ export const StationModal = () => {
             <Form.Group className="mb-3" controlId="stationInfo">
               <Form.Label>Name</Form.Label>
               <Form.Control
+                onChange={(e) => setStation({...station, name: e.target.value})}
                 type="text"
                 placeholder="Station name"
                 autoFocus
               />
               <Form.Label>Address</Form.Label>
               <Form.Control
+                onChange={(e) => setStation({...station, address: e.target.value})}
                 type="text"
                 placeholder="Station address"
               />
             <Form.Label>ID</Form.Label>
               <Form.Control
+                onChange={(e) => setStation({...station, id: Number(e.target.value)})}
                 type="number"
                 placeholder="Station ID"
                 />
             <Form.Label>City</Form.Label>
               <Form.Control
+                onChange={(e) => setStation({...station, city: e.target.value})}
                 type="text"
                 placeholder="City name"
                 />
+              <Form.Label>Coordinates</Form.Label>
+              <Form.Control
+                onChange={(e) => setStation({...station, coordinates: {...station.coordinates, y: Number(e.target.value)}})}
+                type="number"
+                step="0.01"
+                placeholder="latitude"
+                />
+                <Form.Control
+                onChange={(e) => setStation({...station, coordinates: {...station.coordinates, x: Number(e.target.value)}})}
+                type="number"
+                step="0.01"
+                placeholder="longitude"
+                />
             <Form.Label>Capacity</Form.Label>
               <Form.Control
+                onChange={(e) => setStation({...station, capacity: Number(e.target.value)})}
                 type="number"
                 placeholder="Stations capacity"
                 />
             <Form.Label>Operator</Form.Label>
               <Form.Control
+                onChange={(e) => setStation({...station, operator: e.target.value})}
+                name="operator"
                 type="text"
                 placeholder="Operator"
-                />
-            <Form.Label>Coordinates</Form.Label>
-              <Form.Control
-                type="number"
-                step="0.01"
-                placeholder="latitude"
-                />
-              <Form.Control
-                type="number"
-                step="0.01"
-                placeholder="longitude"
                 />
             </Form.Group>
           </Form>
