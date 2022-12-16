@@ -6,6 +6,7 @@ import { getStations } from '../lib/apiRequests/stationRequest'
 import '../styles/stations.css'
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { PageLoadingSpinner } from '../components/Spinner'
+import { StationModal } from '../components/StationModal'
 
 
 export const Stations = (): JSX.Element => {
@@ -44,7 +45,7 @@ export const Stations = (): JSX.Element => {
     return(
         <div className='body'>
 
-            <Form onSubmit={(e) => e.preventDefault()}  onKeyDown={handleKeyDown}>
+            <Form className='searchForm' onSubmit={(e) => e.preventDefault()}  onKeyDown={handleKeyDown}>
                 <Form.Group className="mb-3">
                     <Form.Control onChange={onInputChange} type="text" placeholder="Station name" value={searhField} />
                     <Form.Text className="text-muted">
@@ -53,6 +54,8 @@ export const Stations = (): JSX.Element => {
                 </Form.Group>
             <Button variant="primary" onClick={onSearch}>Search</Button>
             </Form>
+
+            <StationModal />
 
             <div className="page">
                 <Button variant='white' onClick={() => 

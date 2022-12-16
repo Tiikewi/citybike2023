@@ -48,7 +48,7 @@
     justify-self: flex-end;
 }
 
-form {
+.searchForm {
     display: flex;
     flex-direction: column;
     margin: 1rem;
