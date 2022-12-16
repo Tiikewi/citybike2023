@@ -70,7 +70,7 @@ export const Stations = (): JSX.Element => {
             <div className="stations">
                {data?.data === null ? (<p>No stations</p>) : (
                 data?.data.map(st =>  (
-                <StationCard station={st}></StationCard>
+                <StationCard key={st.id} station={st}></StationCard>
                 )))}
             </div>
             }
